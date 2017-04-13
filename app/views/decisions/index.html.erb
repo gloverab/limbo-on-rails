@@ -1,0 +1,25 @@
+<div class="center-column">
+  <div class="new-decision-from-index">
+    <%= form_for @decision, :url => '/decisions/new_from_index' do |f| %>
+    <div class="field">
+      <%= f.text_field :title, placeholder: "What do you need help deciding?" %><%= f.submit "+", id: "decision_title_submit" %>
+    </div>
+    <% end %>
+  </div>
+
+  <h3>Or, you can be a part of these decisions:</h3>
+
+  <% @decisions.each do |decision| %>
+    <article>
+      <h2><strong>"</strong><%= decision.title %><strong>"</strong></h2>
+      <h4>help @<%= link_to decision.author.username, decision.author %> choose between:</h4>
+      <div id="vote-btn-wrapper">
+        <%= button_to decision.option_1, "decision/1/update", class: "vote-btn" %>
+        <%= button_to decision.option_2, "decision/2/update", class: "vote-btn" %>
+      </div><br>
+      <div id="decision-details">
+        <h5><%= link_to decision.author.username, decision.author %> needs to know by <%= decision.deadline %> - - <%= link_to "More info on this post", decision %></h5>
+      </div>
+    </article>
+  <% end %>
+</div>
