@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170413190226) do
+ActiveRecord::Schema.define(version: 20170414161405) do
 
   create_table "decisions", force: :cascade do |t|
     t.string   "title"
@@ -22,6 +22,12 @@ ActiveRecord::Schema.define(version: 20170413190226) do
     t.string   "option_1"
     t.string   "option_2"
     t.integer  "author_id"
+  end
+
+  create_table "options", force: :cascade do |t|
+    t.string  "content"
+    t.integer "choice_number"
+    t.integer "decision_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -47,6 +53,8 @@ ActiveRecord::Schema.define(version: 20170413190226) do
   create_table "votes", force: :cascade do |t|
     t.integer "user_id"
     t.integer "decision_id"
+    t.integer "option_id"
+    t.integer "voter_id"
   end
 
 end

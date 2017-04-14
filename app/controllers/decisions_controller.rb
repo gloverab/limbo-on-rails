@@ -13,8 +13,12 @@ class DecisionsController < ApplicationController
     if params[:decision]
       params.permit(:title)
       @decision = Decision.new(title: params[:decision][:title])
+      @decision.options.build(choice_number: 1)
+      @decision.options.build(choice_number: 2)
     else
       @decision = Decision.new(title: "Your Title Here")
+      @decision.options.build(choice_number: 1)
+      @decision.options.build(choice_number: 2)
     end
   end
 
@@ -37,7 +41,7 @@ class DecisionsController < ApplicationController
   private
 
   def decision_params
-    params.require(:decision).permit(:title, :content, :hours, :minutes, :option_1, :option_2, :deadline)
+    params.require(:decision).permit(:title, :content, :hours, :minutes, :option_1, :option_2, :deadline, :options_attributes => [:content])
   end
 
 end

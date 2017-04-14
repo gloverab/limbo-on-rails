@@ -12,10 +12,11 @@
   <% @decisions.each do |decision| %>
     <article>
       <h2><strong>"</strong><%= decision.title %><strong>"</strong></h2>
-      <h4>help @<%= link_to decision.author.username, decision.author %> choose between:</h4>
       <div id="vote-btn-wrapper">
-        <%= button_to decision.option_1, "decision/1/update", class: "vote-btn" %>
-        <%= button_to decision.option_2, "decision/2/update", class: "vote-btn" %>
+        <% decision.options.each do |option| %>
+        <%= button_to option.content, decision_option_vote_path(decision.id, option.id), class: "vote-btn" %>
+        <%= option.vote_count %>
+        <% end %>
       </div><br>
       <div id="decision-details">
         <h5><%= link_to decision.author.username, decision.author %> needs to know by <%= decision.deadline %> - - <%= link_to "More info on this post", decision %></h5>
