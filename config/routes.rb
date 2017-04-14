@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :users
+  resources :options
 
   resources :decisions do
     resources :options do
@@ -14,6 +15,6 @@ Rails.application.routes.draw do
   # resources :options
   post '/decisions/new', to: 'decisions#create'
   post '/decisions/new_from_index', to: 'decisions#new'
-  post '/options/:id/vote', to: 'options#vote'
+
 
 end
