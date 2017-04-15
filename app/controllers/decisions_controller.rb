@@ -23,7 +23,6 @@ class DecisionsController < ApplicationController
   end
 
   def new_from_index
-
   end
 
   def create
@@ -36,6 +35,12 @@ class DecisionsController < ApplicationController
     else
       flash[:notice] = "Uh oh! Looks like you didn't fill everything in. Please have a second look, and we'll be happy to help you make up your mind."
     end
+  end
+
+  def destroy
+    @decision = Decision.find_by_id(params[:id])
+    @decision.destroy
+    redirect_to decisions_path, notice: "You've successfully deleted your past dilemma."
   end
 
   private

@@ -1,3 +1,5 @@
+<%= render "header" %>
+
 <div class="center-column">
   <div class="new-decision-from-index">
     <%= form_for @decision, :url => '/decisions/new_from_index' do |f| %>
@@ -24,7 +26,7 @@
         <% end %>
       </div><br>
       <div id="decision-details">
-        <h5><%= link_to decision.author.username, decision.author %> needs to know by <%= decision.deadline %> - - <%= link_to "More info on this post", decision %></h5>
+        <h5><%= link_to decision.author.username, decision.author %> needs to know by <%= decision.deadline %> - - <%= link_to "more info", decision %><%= link_to " - - delete", decision, method: :delete if decision.author == current_user %></h5>
       </div>
     </article>
   <% end %>

@@ -1,3 +1,5 @@
+<%= render "header" %>
+
 <div class="center-column">
   <%= form_for @decision do |f| %>
 
@@ -12,7 +14,7 @@
   </div>
 
   <div class="field">
-    <%= f.fields_for :options do |opt| %><br>
+    <%= f.fields_for :options do |opt| %>
       Option <%= opt.object.choice_number %><br>
       <%= opt.text_field :content, placeholder: "The Room", class: "option-box" %><br>
     <% end %>

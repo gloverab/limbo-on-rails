@@ -15,6 +15,6 @@ Rails.application.routes.draw do
   # resources :options
   post '/decisions/new', to: 'decisions#create'
   post '/decisions/new_from_index', to: 'decisions#new'
-
+  post '/users/:avatar/avatar_select', to: 'users#avatar_select'
 
 end
