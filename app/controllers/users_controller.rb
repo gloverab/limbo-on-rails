@@ -4,8 +4,7 @@ class UsersController < ApplicationController
   end
 
   def avatar_select
-    current_user.update(avatar: params[:avatar])
-    # binding.pry
+    current_user.update(avatar: Avatar.find_by_id(params[:avatar_id]))
     redirect_to edit_user_registration_path
   end
 end
