@@ -1,8 +1,14 @@
 class DecisionsController < ApplicationController
 
   def index
-    @decision = Decision.new
-    @decisions = Decision.all.order(id: :desc)
+    if params[:user_id]
+      @user = User.find_by_id(params[:user_id])
+      @decision = Decision.new
+      @decisions = @user.decisions.order(id: :desc)
+    else
+      @decision = Decision.new
+      @decisions = Decision.all.order(id: :desc)
+    end
   end
 
   def show

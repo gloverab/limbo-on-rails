@@ -1,8 +1,7 @@
 class VotesController < ApplicationController
 
   def create
-    @vote = Vote.new(vote_params)
-    @vote.save
+    Vote.find_or_create_by(vote_params)
     redirect_to decisions_path
   end
 

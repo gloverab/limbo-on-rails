@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: "registrations" }
   resources :users do
+    resources :decisions
     resources :avatars do
       post 'select', to: 'users#avatar_select'
     end
@@ -15,10 +16,7 @@ Rails.application.routes.draw do
     end
   end
 
-
-  # resources :options
   post '/decisions/new', to: 'decisions#create'
   post '/decisions/new_from_index', to: 'decisions#new'
-  # post '/users/:avatar/avatar_select', to: 'users#avatar_select'
 
 end

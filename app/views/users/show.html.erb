@@ -1,7 +1,8 @@
 <div class="profile-wrapper">
 
   <div class="user-info">
-    <h3><strong><%= @user.username %></strong></h3>
+    <h2><strong><%= @user.username %></strong></h2>
+    <h3><%= link_to "View all of #{@user.username}'s dilemmas", user_decisions_path(@user.id) %></h3>
     <h3>Decisions Made: <%= @user.number_of_decisions_made %></h3>
     <h3>Dilemmas Posed: <%= @user.number_of_dilemmas_posed %></h3>
     <br>

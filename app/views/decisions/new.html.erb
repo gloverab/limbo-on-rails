@@ -1,36 +1,44 @@
 <%= render "header" %>
 
-<div class="center-column">
-  <%= form_for @decision do |f| %>
+<div class="center-column group">
 
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title, placeholder: @decision.title %>
+  <%= render "profile_card" %>
+
+  <div class="decision-strip">
+    <div id="new-dilemma">
+      <h3>Post a New Dilemma</h3>
+      <%= form_for @decision do |f| %>
+
+      <div class="field">
+        <%= f.label :question %><br>
+        <%= f.text_field :title, placeholder: @decision.title %>
+      </div>
+
+      <div class="field">
+        <%= f.label :content %><br>
+        <%= f.text_area :content, placeholder: "Ask the universe any either/or question (i.e. 'should I watch The Room or Rocky Horror Picture Show?')" %>
+      </div>
+
+      <div class="field">
+        <%= f.fields_for :options do |opt| %>
+          Option <%= opt.object.choice_number %><br>
+          <%= opt.text_field :content, placeholder: "The Room", class: "option-box" %><br>
+        <% end %>
+      </div>
+
+      <div class="field">
+        <%= f.label "When do you need to have an answer by?" %><br>
+        <%= f.number_field :hours, value: 0, class: "time-box" %>
+        <%= f.label :hours %>
+        <%= f.number_field :minutes, class: "time-box" %>
+        <%= f.label :minutes %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Ask!" %>
+      </div>
+
+      <% end %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :content %><br>
-    <%= f.text_area :content, placeholder: "Ask the universe any either/or question (i.e. 'should I watch The Room or Rocky Horror Picture Show?')" %>
-  </div>
-
-  <div class="field">
-    <%= f.fields_for :options do |opt| %>
-      Option <%= opt.object.choice_number %><br>
-      <%= opt.text_field :content, placeholder: "The Room", class: "option-box" %><br>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label "When do you need to have an answer by?" %><br>
-    <%= f.number_field :hours, value: 0, class: "time-box" %>
-    <%= f.label :hours %>
-    <%= f.number_field :minutes, class: "time-box" %>
-    <%= f.label :minutes %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Ask!" %>
-  </div>
-
-  <% end %>
 </div>

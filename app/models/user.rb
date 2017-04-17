@@ -8,6 +8,11 @@ class User < ActiveRecord::Base
   has_many :votes, foreign_key: "voter_id"
   belongs_to :avatar, optional: true
 
+
+  def self.most_indecisive
+    # binding.pry
+  end
+
   def vote_content(interaction)
     vote = self.votes.find{|vote| vote.decision == interaction}
     vote.option.content

@@ -1,0 +1,17 @@
+<%= render "decisions/header" %>
+<div class="center-column group">
+  <%= render "decisions/profile_card" %>
+  <div id="user-strip">
+      <% @users.each do |user| %>
+        <div id="user-slide">
+          <%= image_tag user.avatar.image_path, id: "user-slide-avatar" if user.avatar %>
+          <h3><strong><%= link_to user.username, user %></strong></h3>
+          <p>
+            <%= user.first_name %> <%= user.last_name %>
+          </p>
+          <h3>Decisions Made: <%= user.number_of_decisions_made %></h3>
+          <h3>Dilemmas Posed: <%= user.number_of_dilemmas_posed %></h3>
+        </div>
+      <% end %>
+  </div>
+</div>
