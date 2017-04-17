@@ -24,11 +24,36 @@ article h2 {
 }
 
 .center-column {
-  text-align: center;
+  position: relative;
   border: 1px solid #3b4049;
   width: 95%;
   display: block;
   margin: 0 auto;
+}
+
+.decision-strip {
+  float: right;
+  margin-right: 15px;
+  text-align: center;
+  right: 0;
+}
+
+.profile-card {
+  position: relative;
+  padding: 5px;
+  float: left;
+  margin-top: 15px;
+  margin-left: 15px;
+  border: 1px solid #3b4049;
+  border-radius: 4px;
+  background-color: #dddddd;
+  color: #25282E;
+}
+
+.profile-card ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .new-decision-from-index {
@@ -39,6 +64,21 @@ article h2 {
   text-align: center;
   display: block;
   margin: 0 auto;
+}
+
+.article-avatar {
+  position: absolute;
+  width: 35px;
+  left: 2px;
+  top: 2px;
+  padding: 3px;
+  border-radius: 100%;
+  background-color: white;
+  border: 2px solid #25282E;
+}
+
+.article-avatar:hover {
+  border: 2px solid #F5A241;
 }
 
 .vote-btn {
@@ -61,6 +101,15 @@ article h2 {
   width: 70px;
 }
 
+#active-avatar {
+  border: 4px solid #F5A241;
+}
+
+#profile-card-avatar {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
 
 #decisions-header {
   text-align: left;

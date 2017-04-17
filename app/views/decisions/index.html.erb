@@ -1,33 +1,55 @@
 <%= render "header" %>
 
-<div class="center-column">
-  <div class="new-decision-from-index">
-    <%= form_for @decision, :url => '/decisions/new_from_index' do |f| %>
-    <div class="field">
-      <%= f.text_field :title, placeholder: "What do you need help deciding?" %><%= f.submit "+", id: "decision_title_submit" %>
-    </div>
-    <% end %>
+<div class="center-column group">
+
+  <div class="profile-card">
+    <%= image_tag current_user.avatar.image_path, id: "profile-card-avatar" if current_user.avatar %>
+    <h2>@<%= current_user.username %></h2>
+    <h3>Decisions Made: <%= current_user.number_of_decisions_made %></h3>
+    <h3>Dilemmas Posed: <%= current_user.number_of_dilemmas_posed %></h3>
+    <br>
+    <ul>
+      <li>First Name: <%= current_user.first_name if current_user.first_name %></li>
+      <li>Last Name: <%= current_user.last_name %></li>
+      <% if current_user.most_recent_decision_made %>
+        <li>Most Recent Decision Made: <%= link_to current_user.most_recent_decision_made.title, current_user.most_recent_decision_made %></li>
+      <% end %>
+      <% if current_user.most_recent_dilemma_posed %>
+        <li>Most Recent Dilemma Posed: <%= link_to current_user.most_recent_dilemma_posed.title, current_user.most_recent_dilemma_posed %></li>
+      <% end %>
+    </ul>
   </div>
 
-  <h3>Or, you can be a part of these decisions:</h3>
-
-  <% @decisions.each do |decision| %>
-    <article>
-      <h2><strong>"</strong><%= decision.title %><strong>"</strong></h2>
-      <div id="vote-btn-wrapper">
-        <% div_number = 0 %>
-        <% decision.options.each do |option| %>
-        <% div_id = "option-box-#{div_number}" %>
-        <div id="<%= div_id %>">
-          <%= link_to option.content, decision_option_vote_path(decision.id, option.id), method: :post, class: "vote-btn" %><br>
-          <%= link_to option.vote_count, option, id: "vote-count" %>
-        </div>
-        <% div_number += 1 %>
-        <% end %>
-      </div><br>
-      <div id="decision-details">
-        <h5><%= link_to decision.author.username, decision.author %> needs to know by <%= decision.deadline %> - - <%= link_to "more info", decision %><%= link_to " - - delete", decision, method: :delete if decision.author == current_user %></h5>
+  <div class="decision-strip">
+    <div class="new-decision-from-index">
+      <%= form_for @decision, :url => '/decisions/new_from_index' do |f| %>
+      <div class="field">
+        <%= f.text_field :title, placeholder: "What do you need help deciding?" %><%= f.submit "+", id: "decision_title_submit" %>
       </div>
-    </article>
-  <% end %>
+      <% end %>
+    </div>
+
+    <h3>Or, you can be a part of these decisions:</h3>
+
+    <% @decisions.each do |decision| %>
+      <article>
+        <%= link_to image_tag(decision.author.avatar.image_path, class: "article-avatar"), decision.author if decision.author.avatar %>
+        <h2><strong>"</strong><%= decision.title %><strong>"</strong></h2>
+        <div id="vote-btn-wrapper">
+          <% div_number = 0 %>
+          <% decision.options.each do |option| %>
+          <% div_id = "option-box-#{div_number}" %>
+          <div id="<%= div_id %>">
+            <%= link_to option.content, decision_option_vote_path(decision.id, option.id), method: :post, class: "vote-btn" %><br>
+            <%= link_to option.vote_count, option, id: "vote-count" %>
+          </div>
+          <% div_number += 1 %>
+          <% end %>
+        </div><br>
+        <div id="decision-details">
+          <h5><%= link_to decision.author.username, decision.author %> needs to know by <%= decision.deadline %> - - <%= link_to "more info", decision %><%= link_to " - - delete", decision, method: :delete if decision.author == current_user %></h5>
+        </div>
+      </article>
+    <% end %>
+  </div>
 </div>
