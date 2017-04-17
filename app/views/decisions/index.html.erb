@@ -48,19 +48,36 @@
           <h5><%= decision.content %></h5>
         <% end %>
         <div id="vote-btn-wrapper">
-          <% div_number = 0 %>
-          <% decision.options.each do |option| %>
-          <% div_id = "option-box-#{div_number}" %>
-          <div class: "option-box", id="<%= div_id %>">
-            <%= link_to option.content, decision_option_vote_path(decision.id, option.id), method: :post, id: "vote-btn" %><br>
-            <%= link_to option.vote_count, option, id: "vote-count" %>
-          </div>
-          <% div_number += 1 %>
+          <% if !current_user.decisions_made.include?(decision) %>
+            <% div_number = 0 %>
+            <% decision.options.each do |option| %>
+            <% div_id = "option-box-#{div_number}" %>
+            <div class: "option-box", id="<%= div_id %>">
+              <%= link_to option.content, decision_option_vote_path(decision.id, option.id), method: :post, id: "vote-btn" %><br>
+              <%= link_to option.vote_count, option, id: "vote-count" %>
+            </div>
+            <% div_number += 1 %>
+            <% end %>
+          <% else %>
+            <% div_number = 0 %>
+            <% decision.options.each do |option| %>
+            <% div_id = "option-box-#{div_number}" %>
+            <div class: "option-box", id="<%= div_id %>">
+              <% if current_user.vote_content(decision) == option.content %>
+                <%= link_to option.content, decision_option_vote_path(decision.id, option.id), method: :post, id: "vote-selected-btn" %>
+              <% else %>
+                <%= link_to option.content, decision_option_vote_path(decision.id, option.id), method: :post, id: "vote-rejected-btn" %>
+              <% end %>
+              <br>
+              <%= link_to option.vote_count, option, id: "vote-count" %>
+            </div>
+            <% div_number += 1 %>
+            <% end %>
           <% end %>
         </div><br>
         <div id="decision-details">
           <% if Time.now < decision.deadline %>
-            <h5><%= link_to decision.author.username, decision.author %> needs to know in <%= distance_of_time_in_words(Time.now, decision.deadline) %> - - <%= link_to " - - delete", decision, method: :delete if decision.author == current_user %></h5>
+            <h5><%= link_to decision.author.username, decision.author %> needs to know in <%= distance_of_time_in_words(Time.now, decision.deadline) %><%= link_to " - - delete", decision, method: :delete if decision.author == current_user %></h5>
           <% else %>
             <h5><%= link_to decision.author.username, decision.author %> needed to know by <%= decision.deadline.strftime("%I:%M %p") %> on <%= decision.deadline.strftime("%B %d, %Y") %>, and you're too late.</h5>
           <% end %>
