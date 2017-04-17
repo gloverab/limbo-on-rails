@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'application#splash'
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: "registrations" }
   resources :users do
     resources :avatars do
       post 'select', to: 'users#avatar_select'

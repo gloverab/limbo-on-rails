@@ -8,7 +8,7 @@ textarea {
 article {
   position: relative;
   width: 550px;
-  height: 200px;
+  min-height: 160px;
   display: block;
   margin: 0 auto;
   margin-bottom: 15px;
@@ -21,6 +21,8 @@ article {
 
 article h2 {
   margin: 10px;
+  margin-bottom: 0;
+  margin-left: 28px;
 }
 
 .center-column {
@@ -42,9 +44,11 @@ article h2 {
   position: relative;
   padding: 5px;
   float: left;
+  min-width: 350px;
+  max-width: 400px;
   margin-top: 15px;
   margin-left: 15px;
-  border: 1px solid #3b4049;
+  border: 1px solid #ED9F13;
   border-radius: 4px;
   background-color: #dddddd;
   color: #25282E;
@@ -79,18 +83,6 @@ article h2 {
 
 .article-avatar:hover {
   border: 2px solid #F5A241;
-}
-
-.vote-btn {
-  background-color: #F5A241;
-  display: inline-block;
-  text-align: center;
-  font-size: 1em;
-  width: 90%;
-  height: 50px;
-  margin: 0;
-  padding: 5px;
-  border-radius: 4px;
 }
 
 .option-box {
@@ -137,6 +129,18 @@ article h2 {
   height: 600px;
 }
 
+#vote-btn {
+  background-color: #F5A241;
+  display: inline-block;
+  text-align: center;
+  font-size: 1em;
+  width: 90%;
+  height: 50px;
+  margin: 0;
+  padding: 5px;
+  border-radius: 4px;
+}
+
 #vote-btn-wrapper {
   width: 100%;
   display: inline;
@@ -162,6 +166,7 @@ article h2 {
   display: inline-block;
   padding: 2px 5px 0 5px;
   border-bottom-left-radius: 6px;
+  margin-bottom: 30px;
 }
 
 #decision_title {
@@ -179,6 +184,7 @@ article h2 {
 #decision-details {
   width: 100%;
   position: absolute;
+  margin-top: 5px;
   bottom: 0;
   border-top: 1px solid #25282E;
 }

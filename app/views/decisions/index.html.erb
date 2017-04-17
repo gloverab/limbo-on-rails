@@ -32,24 +32,49 @@
     <h3>Or, you can be a part of these decisions:</h3>
 
     <% @decisions.each do |decision| %>
-      <article>
+      <article class="group">
         <%= link_to image_tag(decision.author.avatar.image_path, class: "article-avatar"), decision.author if decision.author.avatar %>
         <h2><strong>"</strong><%= decision.title %><strong>"</strong></h2>
+        <% if decision.content.length > 100 %>
+          <h5><%= truncate(decision.content, length: 80) %>
+            <%= link_to '[read more]', '', class: "read-more-#{decision.id}" %>
+        <script>
+          $('.read-more-<%= decision.id %>').on('click', function(e) {
+            e.preventDefault()
+            $(this).parent().html('<%= escape_javascript decision.content %>')
+          })
+        </script></h5>
+        <% else %>
+          <h5><%= decision.content %></h5>
+        <% end %>
         <div id="vote-btn-wrapper">
           <% div_number = 0 %>
           <% decision.options.each do |option| %>
           <% div_id = "option-box-#{div_number}" %>
-          <div id="<%= div_id %>">
-            <%= link_to option.content, decision_option_vote_path(decision.id, option.id), method: :post, class: "vote-btn" %><br>
+          <div class: "option-box", id="<%= div_id %>">
+            <%= link_to option.content, decision_option_vote_path(decision.id, option.id), method: :post, id: "vote-btn" %><br>
             <%= link_to option.vote_count, option, id: "vote-count" %>
           </div>
           <% div_number += 1 %>
           <% end %>
         </div><br>
         <div id="decision-details">
-          <h5><%= link_to decision.author.username, decision.author %> needs to know by <%= decision.deadline %> - - <%= link_to "more info", decision %><%= link_to " - - delete", decision, method: :delete if decision.author == current_user %></h5>
+          <% if Time.now < decision.deadline %>
+            <h5><%= link_to decision.author.username, decision.author %> needs to know in <%= distance_of_time_in_words(Time.now, decision.deadline) %> - - <%= link_to " - - delete", decision, method: :delete if decision.author == current_user %></h5>
+          <% else %>
+            <h5><%= link_to decision.author.username, decision.author %> needed to know by <%= decision.deadline.strftime("%I:%M %p") %> on <%= decision.deadline.strftime("%B %d, %Y") %>, and you're too late.</h5>
+          <% end %>
         </div>
       </article>
     <% end %>
   </div>
 </div>
+
+<script>
+  $(function() {
+    $("#vote-btn").click(function(evt) {
+       $("#option-box").load(".option-box")
+       evt.preventDefault();
+    })
+  })
+</script>

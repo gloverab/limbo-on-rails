@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :decisions, foreign_key: "author_id"
   has_many :votes, foreign_key: "voter_id"
-  belongs_to :avatar
+  belongs_to :avatar, optional: true
 
   def vote_content(interaction)
     vote = self.votes.find{|vote| vote.decision == interaction}

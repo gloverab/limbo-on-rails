@@ -8,7 +8,7 @@ class Decision < ActiveRecord::Base
     minutes = self.minutes || 0
     hours = self.hours || 0
     new_minutes = minutes + hours_to_minutes(hours)
-    Time.now + new_minutes.minutes
+    Time.now.in_time_zone("Eastern Time (US & Canada)") + new_minutes.minutes
   end
 
   def hours_to_minutes(hours)
