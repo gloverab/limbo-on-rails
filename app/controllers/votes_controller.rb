@@ -1,13 +1,20 @@
 class VotesController < ApplicationController
 
   def create
-    Vote.find_or_create_by(vote_params)
+    vote = Vote.where(
+      voter_id: current_user.id,
+      decision_id: vote_params[:decision_id]
+    ).first_or_create
+
+    flash[:notice] = "You just updated your vote" if !vote.persuasion.nil?
+    vote.update(persuasion: vote_params[:persuasion])
+
     redirect_to decisions_path
   end
 
   private
 
   def vote_params
-    params.permit(:option_id, :decision_id).merge(voter_id: current_user.id)
+    params.permit(:persuasion, :decision_id).merge(voter_id: current_user.id)
   end
 end

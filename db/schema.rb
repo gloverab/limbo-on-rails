@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170416191315) do
+ActiveRecord::Schema.define(version: 20170418195148) do
 
   create_table "avatars", force: :cascade do |t|
     t.string "name"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20170416191315) do
     t.integer "decision_id"
     t.integer "option_id"
     t.integer "voter_id"
+    t.boolean "persuasion"
   end
 
 end

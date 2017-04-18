@@ -7,9 +7,10 @@
   <div class="decision-strip">
     <% if !@user %>
     <div class="new-decision-from-index">
-      <%= form_for @decision, :url => '/decisions/new_from_index' do |f| %>
+      <%= form_tag new_decision_path, method: :get do %>
       <div class="field">
-        <%= f.text_field :title, placeholder: "What do you need help deciding?" %><%= f.submit "+", id: "decision_title_submit" %>
+        <%= text_field_tag :title, "", id: "new_from_index", placeholder: "What do you need help deciding?" %>
+        <%= submit_tag "+", id: "decision_title_submit" %>
       </div>
       <% end %>
       <h3>Or, you can be a part of these decisions:</h3>
@@ -32,7 +33,7 @@
         <h2><strong>"</strong><%= decision.title %><strong>"</strong></h2>
 
         <div id="vote-btn-wrapper">
-          <% if !current_user.decisions_made.include?(decision) %>
+          <% if !current_user.voted_decisions.include?(decision) %>
             <% if decision.content.length > 100 %>
               <h5><%= truncate(decision.content, length: 80) %>
                 <%= link_to '[read more]', '', class: "read-more-#{decision.id}" %>
@@ -45,32 +46,17 @@
             <% else %>
               <h5><%= decision.content %></h5>
             <% end %>
-            <% div_number = 0 %>
-            <% decision.options.each do |option| %>
-            <% div_id = "option-box-#{div_number}" %>
-            <div class: "option-box", id="<%= div_id %>">
-              <%= link_to option.content, decision_option_vote_path(decision.id, option.id), method: :post, class: "vote-btn" %><br>
-              <%= link_to option.vote_count, option, class: "vote-count" %>
-            </div>
-            <% div_number += 1 %>
-            <% end %>
+
+            <%= render partial: 'votes/option_boxes', locals: {decision: decision} %>
 
           <% else %>
           <h5>You've already voted on this question:</h5>
-            <% div_number = 0 %>
-            <% decision.options.each do |option| %>
-            <% div_id = "option-box-#{div_number}" %>
-            <div class: "option-box", id="<%= div_id %>">
 
-                <%= link_to option.content, decision_option_vote_path(decision.id, option.id), method: :post, class: "vote-btn", id: "#{current_user.vote_content(decision) == option.content ? 'vote-selected-btn': 'vote-rejected-btn'}" %>
+            <%= render partial: 'votes/option_boxes', locals: {decision: decision} %>
 
-              <br>
-              <%= link_to option.vote_count, option, class: "vote-count", id: "#{current_user.vote_content(decision) == option.content ? 'vote-selected-btn': 'vote-rejected-btn'}" %>
-            </div>
-            <% div_number += 1 %>
-            <% end %>
           <% end %>
-        </div><br>
+        </div>
+        <br>
         <div id="decision-details">
           <% if Time.now < decision.deadline %>
             <h5><%= link_to decision.author.username, decision.author %> needs to know in <%= distance_of_time_in_words(Time.now, decision.deadline) %><%= link_to " - - delete", decision, method: :delete if decision.author == current_user %></h5>

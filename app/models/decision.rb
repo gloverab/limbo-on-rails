@@ -1,8 +1,8 @@
 class Decision < ActiveRecord::Base
   belongs_to :author, class_name: "User"
-  has_many :options
-  has_many :votes, through: :options
-  accepts_nested_attributes_for :options
+  # has_many :options
+  has_many :votes
+  # accepts_nested_attributes_for :options
 
   def deadline_calculator
     minutes = self.minutes || 0
@@ -14,4 +14,13 @@ class Decision < ActiveRecord::Base
   def hours_to_minutes(hours)
     hours*60
   end
+
+  def votes_for_option_1
+    votes.where(persuasion: true).count
+  end
+
+  def votes_for_option_2
+    votes.where(persuasion: false).count
+  end
+
 end

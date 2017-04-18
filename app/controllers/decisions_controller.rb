@@ -2,13 +2,12 @@ class DecisionsController < ApplicationController
 
   def index
     if params[:user_id]
-      @user = User.find_by_id(params[:user_id])
-      @decision = Decision.new
+      @user = User.find(params[:user_id])
       @decisions = @user.decisions.order(id: :desc)
     else
-      @decision = Decision.new
       @decisions = Decision.all.order(id: :desc)
     end
+    @decision = Decision.new
   end
 
   def show
@@ -16,19 +15,20 @@ class DecisionsController < ApplicationController
   end
 
   def new
-    if params[:decision]
-      params.permit(:title)
-      @decision = Decision.new(title: params[:decision][:title])
-      @decision.options.build(choice_number: 1)
-      @decision.options.build(choice_number: 2)
-    else
-      @decision = Decision.new(title: "Your Title Here")
-      @decision.options.build(choice_number: 1)
-      @decision.options.build(choice_number: 2)
-    end
-  end
+    # if params[:decision]
+    #   params.permit(:title)
+    #   @decision = Decision.new(title: params[:decision][:title])
+    # else
+    #   @decision = Decision.new(title: "Your Title Here")
+    # end
+    # binding.pry
+    # @title = params[:title]
+    @decision = Decision.new(title: params[:title] || "Your Question Here")
 
-  def new_from_index
+
+    # #Probably want to delete these at some point, after you make sure everything works.
+    # @decision.options.build(choice_number: 1)
+    # @decision.options.build(choice_number: 2)
   end
 
   def create

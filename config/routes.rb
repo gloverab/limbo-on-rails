@@ -12,14 +12,16 @@ Rails.application.routes.draw do
   end
   resources :options
 
+  # resources :decisions do
+  #   resources :options do
+  #     post 'vote', to: 'votes#create'
+  #   end
+  # end
+
   resources :decisions do
-    resources :options do
-      post 'vote', to: 'votes#create'
-    end
+    post 'vote', to: 'votes#create'
   end
 
-  # get '/users/most_indecisive', to: 'users#most_indecisive'
   post '/decisions/new', to: 'decisions#create'
-  post '/decisions/new_from_index', to: 'decisions#new'
 
 end
