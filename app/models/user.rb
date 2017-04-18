@@ -8,10 +8,23 @@ class User < ActiveRecord::Base
   has_many :votes, foreign_key: "voter_id"
   belongs_to :avatar, optional: true
 
+  validates_presence_of :first_name, :last_name, :username, :email, on: :update
 
-  def self.most_indecisive
-    # binding.pry
-  end
+  scope :by_signup, -> {order(id: :asc)}
+  scope :most_indecisive, -> {joins(:decisions).group("users.id").order("count(users.id) DESC")}
+  scope :most_decisive, -> {joins(:votes).group("users.id").order("count(users.id) DESC")}
+
+  # def self.by_signup
+  #   order(id: :asc)
+  # end
+  # 
+  # def self.most_indecisive
+  #   joins(:decisions).group("users.id").order("count(users.id) DESC")
+  # end
+  #
+  # def self.most_decisive
+  #   joins(:votes).group("users.id").order("count(users.id) DESC")
+  # end
 
   def vote_content(interaction)
     vote = self.votes.find{|vote| vote.decision == interaction}

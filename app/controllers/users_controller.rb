@@ -1,12 +1,17 @@
 class UsersController < ApplicationController
 
   def index
-    @users = User.all
+    @users = User.by_signup
   end
 
   def most_indecisive
-    # binding.pry
-    @users = User.all
+    @users = User.most_indecisive
+    render template: 'users/index'
+  end
+
+  def most_decisive
+    @users = User.most_decisive
+    render template: 'users/index'
   end
 
   def show

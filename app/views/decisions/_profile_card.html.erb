@@ -8,7 +8,7 @@
     <li>First Name: <%= current_user.first_name if current_user.first_name %></li>
     <li>Last Name: <%= current_user.last_name %></li>
     <% if current_user.most_recent_decision_made %>
-      <li>Most Recent Decision Made: <%= link_to current_user.most_recent_decision_made.title, current_user.most_recent_decision_made %></li>
+      <li>Most Recent Input Given: <%= link_to current_user.most_recent_decision_made.title, current_user.most_recent_decision_made %></li>
     <% end %>
     <% if current_user.most_recent_dilemma_posed %>
       <li>Most Recent Dilemma Posed: <%= link_to current_user.most_recent_dilemma_posed.title, current_user.most_recent_dilemma_posed %></li>
