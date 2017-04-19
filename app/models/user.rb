@@ -2,9 +2,8 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-
-  validates_presence_of :first_name, :last_name, :username, :email, on: :update
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, :omniauth_providers => [:facebook]
 
   has_many :decisions, foreign_key: "author_id"
   has_many :votes, foreign_key: "voter_id"
@@ -58,6 +57,16 @@ class User < ActiveRecord::Base
 
   def avatar_display
     avatar.capitalize + '-icon.png'
+  end
+
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      binding.pry
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20]
+      user.name = auth.info.name   # assuming the user model has a name
+      user.image = auth.info.image
+    end
   end
 
 end

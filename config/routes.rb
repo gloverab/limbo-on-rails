@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   root 'application#splash'
 
-  devise_for :users, controllers: { registrations: "registrations" }
+  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
+
   resources :users do
     get 'most_indecisive', on: :collection
     get 'most_decisive', on: :collection
@@ -11,12 +12,6 @@ Rails.application.routes.draw do
     end
   end
   resources :options
-
-  # resources :decisions do
-  #   resources :options do
-  #     post 'vote', to: 'votes#create'
-  #   end
-  # end
 
   resources :decisions do
     post 'vote', to: 'votes#create'

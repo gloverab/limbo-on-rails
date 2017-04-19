@@ -15,20 +15,7 @@ class DecisionsController < ApplicationController
   end
 
   def new
-    # if params[:decision]
-    #   params.permit(:title)
-    #   @decision = Decision.new(title: params[:decision][:title])
-    # else
-    #   @decision = Decision.new(title: "Your Title Here")
-    # end
-    # binding.pry
-    # @title = params[:title]
     @decision = Decision.new(title: params[:title] || "Your Question Here")
-
-
-    # #Probably want to delete these at some point, after you make sure everything works.
-    # @decision.options.build(choice_number: 1)
-    # @decision.options.build(choice_number: 2)
   end
 
   def create
