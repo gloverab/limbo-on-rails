@@ -4,4 +4,8 @@ class Avatar < ActiveRecord::Base
     "/users/#{self.id}/avatar_select"
   end
 
+  def self.show_generic
+    where(generic: true)
+  end
+
 end

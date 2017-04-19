@@ -4,7 +4,7 @@
   <div class="avatar-strip">
     <h3>Select an avatar (they're all friendly):</h3>
     <ul>
-      <% Avatar.all.each do |avatar| %>
+      <% Avatar.show_generic.each do |avatar| %>
       <% if avatar == current_user.avatar %>
         <li><%= link_to image_tag(avatar.image_path, class: "avatar-select", id: "active-avatar"), user_avatar_select_path(current_user, avatar), method: :post %></li>
       <% else %>
