@@ -15,27 +15,17 @@ class User < ActiveRecord::Base
   scope :most_indecisive, -> {joins(:decisions).group("users.id").order("count(users.id) DESC")}
   scope :most_decisive, -> {joins(:votes).group("users.id").order("count(users.id) DESC")}
 
-  def vote_content(interaction)
-    vote = self.votes.find { |vote| vote.decision == interaction }
-    vote.option.content
-  end
-
-  def vote_option(passed_decision)
+  def vote_content(passed_decision)
+    v = current_vote_for(passed_decision)
     v.persuasion = true ? passed_decision.option_1 : passed_decision.option_2
   end
-
 
   def current_vote_for(passed_decision)
     self.votes.where(decision_id: passed_decision.id).order(id: :desc).first
   end
 
-
   def interactions
-    decisions_made.concat(self.decisions.order(id: :desc)).uniq.reverse
-  end
-
-  def decisions_made
-    votes.order(id: :desc).collect{|x| x.decision}.uniq
+    (voted_decisions + decisions).uniq
   end
 
   def number_of_decisions_made

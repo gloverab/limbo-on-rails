@@ -28,7 +28,7 @@
 
     <div>
       <%= f.label :username %><br />
-      <%= f.text_field :username, readonly: true %>
+      <%= f.text_field :username %>
     </div>
 
     <div>
@@ -39,6 +39,11 @@
     <div>
       <%= f.label :last_name %><br />
       <%= f.text_field :last_name %>
+    </div>
+
+    <div>
+      <%= f.label :age %><br />
+      <%= f.text_field :age %>
     </div>
 
     <div class="field">
@@ -53,11 +58,6 @@
     <div class="field">
       <%= f.label :password_confirmation %><br />
       <%= f.password_field :password_confirmation, autocomplete: "off" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-      <%= f.password_field :current_password, autocomplete: "off" %>
     </div>
 
     <div class="actions">

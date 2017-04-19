@@ -1,33 +1,40 @@
-<div class="profile-wrapper">
+<%= render "decisions/header" %>
 
-  <div class="user-info">
-    <h2><strong><%= @user.username %></strong></h2>
-    <h3><%= link_to "View all of #{@user.username}'s dilemmas", user_decisions_path(@user.id) %></h3>
-    <h3>Decisions Made: <%= @user.number_of_decisions_made %></h3>
-    <h3>Dilemmas Posed: <%= @user.number_of_dilemmas_posed %></h3>
-    <br>
-    <ul>
-      <li>First Name: <%= @user.first_name %></li>
-      <li>Last Name: <%= @user.last_name %></li>
-      <% if @user.most_recent_decision_made %>
-        <li>Most Recent Decision Made: <%= link_to @user.most_recent_decision_made.title, @user.most_recent_decision_made %></li>
-      <% end %>
-      <% if @user.most_recent_dilemma_posed %>
-        <li>Most Recent Dilemma Posed: <%= link_to @user.most_recent_dilemma_posed.title, @user.most_recent_dilemma_posed %></li>
-      <% end %>
-    </ul>
-  </div>
+<div class="center-column group">
 
-  <div class="user-history">
-    <h2>History</h2>
-    <ul>
-      <% @user.interactions.each do |interaction| %>
-        <% if @user == interaction.author %>
-          <li>Asked "<%= link_to interaction.title, decision_path(interaction) %>"</li>
-        <% else %>
-          <li>Voted <%= @user.vote_content(interaction) %> on <%= link_to interaction.title, decision_path %></li>
+  <div class="profile-wrapper">
+
+    <div class="user-info">
+      <%= image_tag current_user.avatar.image_path, id: "profile-show-avatar" if current_user.avatar %>
+      <h2><strong><%= @user.username %></strong></h2>
+      <h3><%= link_to "View all of #{@user.username}'s dilemmas", user_decisions_path(@user.id) %></h3>
+      <h3>Decisions Made: <%= @user.number_of_decisions_made %></h3>
+      <h3>Dilemmas Posed: <%= @user.number_of_dilemmas_posed %></h3>
+      <br>
+      <ul>
+        <li>First Name: <%= @user.first_name %></li>
+        <li>Last Name: <%= @user.last_name %></li>
+        <li>Age: <%= @user.age %></li>
+        <% if @user.most_recent_decision_made %>
+          <li>Most Recent Decision Made: <%= link_to @user.most_recent_decision_made.title, @user.most_recent_decision_made %></li>
         <% end %>
-      <% end %>
-    </ul>
+        <% if @user.most_recent_dilemma_posed %>
+          <li>Most Recent Dilemma Posed: <%= link_to @user.most_recent_dilemma_posed.title, @user.most_recent_dilemma_posed %></li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="user-history">
+      <h2>History</h2>
+      <ul>
+        <% @user.interactions.each do |interaction| %>
+          <% if @user == interaction.author %>
+            <li>Asked "<%= link_to interaction.title, decision_path(interaction) %>"</li>
+          <% else %>
+            <li>Voted "<%= @user.vote_content(interaction) %>" on <%= link_to interaction.title, decision_path %></li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
   </div>
 </div>
