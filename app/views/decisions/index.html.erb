@@ -29,7 +29,7 @@
 
     <% @decisions.each do |decision| %>
       <article class="group">
-        <%= link_to image_tag(decision.author.avatar.image_path, class: "article-avatar"), decision.author if decision.author.avatar %>
+        <%= link_to image_tag(decision.author.avatar.image_path, class: "article-avatar"), decision.author if decision.author  %>
         <h2><strong>"</strong><%= decision.title %><strong>"</strong></h2>
 
         <div id="vote-btn-wrapper">
@@ -59,9 +59,10 @@
         <br>
         <div id="decision-details">
           <% if Time.now < decision.deadline %>
-            <h5><%= link_to decision.author.username, decision.author %> needs to know in <%= distance_of_time_in_words(Time.now, decision.deadline) %><%= link_to " - - delete", decision, method: :delete if decision.author == current_user %></h5>
+            <h5><%= link_to decision.author.username, decision.author if decision.author %> needs to know in <%= distance_of_time_in_words(Time.now, decision.deadline) %><%= link_to " - - delete", decision, method: :delete if decision.author == current_user %></h5>
           <% else %>
-            <h5><%= link_to decision.author.username, decision.author %> needed to know by <%= decision.deadline.strftime("%I:%M %p") %> on <%= decision.deadline.strftime("%B %d, %Y") %>, and you're too late.<%= link_to " - - delete", decision, method: :delete if decision.author == current_user %></h5>
+            <h5><%= decision.author ? (link_to decision.author.username, decision.author) : "a former user" %> needed to know by <%= decision.deadline.strftime("%I:%M %p") %> on <%= decision.deadline.strftime("%B %d, %Y") %>, and you're too late.<%= link_to " - - delete", decision, method: :delete if decision.author == current_user %></h5>
+            <h5><%= link_to "pleasantly discuss this with others", '/' %></h5>
           <% end %>
         </div>
       </article>

@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :votes, foreign_key: "voter_id"
   has_many :voted_decisions, through: :votes, source: :decision
   belongs_to :avatar, optional: true
+  accepts_nested_attributes_for :decisions
 
   scope :by_signup, -> {order(id: :asc)}
   scope :most_indecisive, -> {joins(:decisions).group("users.id").order("count(users.id) DESC")}

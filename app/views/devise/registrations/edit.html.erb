@@ -2,14 +2,14 @@
   <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
   <div class="avatar-strip">
-    <h3>Select an avatar (they're all friendly):</h3>
+    <h3>Don't want your facebook picutre shown? Choose one of these guys to represent you! (they're all friendly):</h3>
     <ul>
       <% Avatar.show_generic.each do |avatar| %>
-      <% if avatar == current_user.avatar %>
-        <li><%= link_to image_tag(avatar.image_path, class: "avatar-select", id: "active-avatar"), user_avatar_select_path(current_user, avatar), method: :post %></li>
-      <% else %>
-        <li><%= link_to image_tag(avatar.image_path, class: "avatar-select"), user_avatar_select_path(current_user, avatar), method: :post %></li>
-      <% end %>
+        <% if avatar == current_user.avatar %>
+          <li><%= link_to image_tag(avatar.image_path, class: "avatar-select", id: "active-avatar"), user_avatar_select_path(current_user, avatar), method: :post %></li>
+        <% else %>
+          <li><%= link_to image_tag(avatar.image_path, class: "avatar-select"), user_avatar_select_path(current_user, avatar), method: :post %></li>
+        <% end %>
       <% end %>
     </ul>
   </div>
