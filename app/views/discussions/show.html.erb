@@ -22,26 +22,35 @@
     </div>
 
     <div class="discussion-details">
-      <h1><strong><%= @discussion.decision.title %></strong></h1>
-      <h4><%= @discussion.reason %></h4>
-      <p><%= @discussion.decision.content %></p>
-    </div>
 
-    <div class="discussion-replies">
-      <% @discussion.replies.each do |reply| %>
-        <h3><%= reply.content %> - <%= reply.author.first_name if reply.author %></h3>
-      <% end %>
-    </div>
+      <div class="discussion-header group">
+        <h1><strong><%= @discussion.decision.title %></strong></h1>
+        <h4><%= @discussion.reason %></h4>
+        <p><%= @discussion.decision.content %></p>
+        <%= render partial: 'votes/option_boxes', locals: {decision: @discussion.decision} %>
+      </div>
 
-    <div class="new-reply">
-      <%= form_for @discussion do |f| %>
-        <%= f.fields_for :reply do |rep| %>
-        <div class="field">
-          <%= rep.text_field :content, id: "new_reply", placeholder: "give your input..." %>
-          <%= f.submit "+", id: "decision_title_submit" %>
-        </div>
+      <div class="new-reply">
+        <%= form_for @discussion do |f| %>
+          <%= f.fields_for :reply do |rep| %>
+          <div class="field">
+            <%= rep.text_field :content, id: "new_reply", placeholder: "give your input..." %>
+            <%= f.submit "+", id: "decision_title_submit" %>
+          </div>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
+
+      <div class="discussion-replies">
+        <% @discussion.replies.each do |reply| %>
+
+        <div class="reply-box group">
+          <%= image_tag reply.author.avatar.image_path, id: 'reply-show-avatar' if reply.author %>
+          <h3><%= reply.content %> - <%= reply.author.first_name if reply.author %></h3>
+        </div>
+
+        <% end %>
+      </div>
     </div>
 
   </div>

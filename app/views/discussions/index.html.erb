@@ -1,0 +1,11 @@
+<%= render 'decisions/header' %>
+
+<div class="center-column group">
+  <div class="discussion-index">
+    <ul>
+      <% @discussions.each do |discussion| %>
+        <li><%= link_to discussion.decision.title, discussion %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

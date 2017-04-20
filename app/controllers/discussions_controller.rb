@@ -1,5 +1,9 @@
 class DiscussionsController < ApplicationController
 
+  def index
+    @discussions = Discussion.all
+  end
+
   def new
     @discussion = Discussion.new
     @discussion.build_decision
