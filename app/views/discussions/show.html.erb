@@ -1,0 +1,48 @@
+<%= render "decisions/header" %>
+
+<div class="center-column group">
+
+  <div class="discussion-overview group">
+
+    <div class="discussion-user">
+      <%= image_tag current_user.avatar.image_path, id: "profile-show-avatar" if current_user.avatar %>
+      <h2><strong><%= @discussion.author.username %></strong></h2>
+      <h3>Decisions Made: <%= @discussion.author.number_of_decisions_made %></h3>
+      <h3>Dilemmas Posed: <%= @discussion.author.number_of_dilemmas_posed %></h3>
+      <br>
+      <ul>
+        <li>Age: <%= @discussion.author.age %></li>
+        <% if @discussion.author.most_recent_decision_made %>
+          <li>Most Recent Decision Made: <%= link_to @discussion.author.most_recent_decision_made.title, @discussion.author.most_recent_decision_made %></li>
+        <% end %>
+        <% if @discussion.author.most_recent_dilemma_posed %>
+          <li>Most Recent Dilemma Posed: <%= link_to @discussion.author.most_recent_dilemma_posed.title, @discussion.author.most_recent_dilemma_posed %></li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="discussion-details">
+      <h1><strong><%= @discussion.decision.title %></strong></h1>
+      <h4><%= @discussion.reason %></h4>
+      <p><%= @discussion.decision.content %></p>
+    </div>
+
+    <div class="discussion-replies">
+      <% @discussion.replies.each do |reply| %>
+        <h3><%= reply.content %> - <%= reply.author.first_name if reply.author %></h3>
+      <% end %>
+    </div>
+
+    <div class="new-reply">
+      <%= form_for @discussion do |f| %>
+        <%= f.fields_for :reply do |rep| %>
+        <div class="field">
+          <%= rep.text_field :content, id: "new_reply", placeholder: "give your input..." %>
+          <%= f.submit "+", id: "decision_title_submit" %>
+        </div>
+        <% end %>
+      <% end %>
+    </div>
+
+  </div>
+</div>

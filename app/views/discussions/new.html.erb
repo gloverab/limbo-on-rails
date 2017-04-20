@@ -1,0 +1,45 @@
+<%= render "decisions/header" %>
+
+<%= form_for @discussion do |f| %>
+
+<div class="field">
+  <%= f.label "Reason for discussion" %>
+  <%= f.text_field :reason %>
+</div>
+
+  <%= f.fields_for :decision do |dec| %>
+
+    <div class="field">
+      <%= dec.label :title %>
+      <%= dec.text_field :title %>
+    </div>
+
+    <div class="field">
+      <%= dec.label :content %>
+      <%= dec.text_area :content %>
+    </div>
+
+    <div class="field">
+      <%= dec.label :option_1 %>
+      <%= dec.text_field :option_1 %>
+    </div>
+
+    <div class="field">
+      <%= dec.label :option_2 %>
+      <%= dec.text_field :option_2 %>
+    </div>
+
+    <div class="field">
+      <%= dec.label "When do you need to have an answer by?" %><br>
+      <%= dec.number_field :hours, value: 0, class: "time-box" %>
+      <%= dec.label :hours %>
+      <%= dec.number_field :minutes, class: "time-box" %>
+      <%= dec.label :minutes %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit "Create Discussion" %>
+  </div>
+
+<% end %>

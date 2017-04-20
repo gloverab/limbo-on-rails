@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :discussions
   root 'application#splash'
 
   devise_for :users, controllers: { registrations: "registrations", omniauth_callbacks: "users/omniauth_callbacks" }
@@ -12,7 +13,7 @@ Rails.application.routes.draw do
     end
   end
   resources :options
-
+  resources :replies, only: [:new, :create, :edit]
   resources :decisions do
     post 'vote', to: 'votes#create'
   end

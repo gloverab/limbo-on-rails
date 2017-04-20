@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   devise :omniauthable, :omniauth_providers => [:facebook]
 
   has_many :decisions, foreign_key: "author_id"
+  has_many :discussions, foreign_key: "author_id"
   has_many :votes, foreign_key: "voter_id"
   has_many :voted_decisions, through: :votes, source: :decision
   belongs_to :avatar, optional: true

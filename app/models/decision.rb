@@ -1,6 +1,6 @@
 class Decision < ActiveRecord::Base
   belongs_to :author, class_name: "User"
-  # has_many :options
+  belongs_to :discussion, optional: true
   has_many :votes
   # accepts_nested_attributes_for :options
 
