@@ -39,6 +39,7 @@ gem 'devise'
 gem 'pundit'
 gem 'faker'
 gem 'omniauth-facebook'
+gem 'seed_dump'
 gem 'typhoeus'
 
 group :development, :test do

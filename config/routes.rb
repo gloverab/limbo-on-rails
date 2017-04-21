@@ -7,17 +7,16 @@ Rails.application.routes.draw do
   resources :users do
     get 'most_indecisive', on: :collection
     get 'most_decisive', on: :collection
+    post 'image_select', to: 'users#image_select'
     resources :decisions, only: [:index]
-    resources :avatars do
-      post 'select', to: 'users#avatar_select'
-    end
   end
   resources :options
-  resources :replies, only: [:new, :create, :edit]
+  resources :replies
   resources :decisions do
     post 'vote', to: 'votes#create'
   end
 
+  patch '/decisions/:id/edit', to: 'decisions#update'
   post '/decisions/new', to: 'decisions#create'
 
 end

@@ -2,7 +2,8 @@ class Decision < ActiveRecord::Base
   belongs_to :author, class_name: "User"
   belongs_to :discussion, optional: true
   has_many :votes
-  # accepts_nested_attributes_for :options
+
+  validates_presence_of :title, :content, :option_1, :option_2
 
   def deadline_calculator
     minutes = self.minutes || 0

@@ -18,8 +18,9 @@ class UsersController < ApplicationController
     @user = User.find_by_id(params[:id])
   end
 
-  def avatar_select
-    current_user.update(avatar: Avatar.find_by_id(params[:avatar_id]))
+  def image_select
+    current_user.update(image_path: params[:image_path])
     redirect_to edit_user_registration_path
   end
+
 end

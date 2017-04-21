@@ -5,7 +5,7 @@
   <div class="discussion-overview group">
 
     <div class="discussion-user">
-      <%= image_tag current_user.avatar.image_path, id: "profile-show-avatar" if current_user.avatar %>
+      <%= image_tag @discussion.author.image_path, class: "profile-show-avatar" if @discussion.author.image_path %>
       <h2><strong><%= @discussion.author.username %></strong></h2>
       <h3>Decisions Made: <%= @discussion.author.number_of_decisions_made %></h3>
       <h3>Dilemmas Posed: <%= @discussion.author.number_of_dilemmas_posed %></h3>
@@ -44,10 +44,15 @@
       <div class="discussion-replies">
         <% @discussion.replies.each do |reply| %>
 
-        <div class="reply-box group">
-          <%= image_tag reply.author.avatar.image_path, id: 'reply-show-avatar' if reply.author %>
-          <h3><%= reply.content %> - <%= reply.author.first_name if reply.author %></h3>
-        </div>
+        <% if reply.author %>
+          <div class="reply-box group">
+            <%= image_tag reply.author.image_path, id: 'reply-show-avatar' %>
+            <h3><%= reply.content %> -@<%= reply.author.username %></h3>
+            <div class="reply-details">
+              <h5><%= reply.author ? (link_to reply.author.username, reply.author) : "a former user" %> posted this in response to <%= link_to @discussion.author.username, @discussion.author %> <%= link_to " - - delete", reply, method: :delete if reply.author == current_user %></h5>
+            </div>
+          </div>
+        <% end %>
 
         <% end %>
       </div>

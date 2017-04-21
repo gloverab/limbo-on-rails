@@ -1,69 +1,65 @@
 <div class="new_user">
   <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-  <div class="avatar-strip">
-    <h3>Don't want your facebook picutre shown? Choose one of these guys to represent you! (they're all friendly):</h3>
-    <ul>
-      <% Avatar.show_generic.each do |avatar| %>
-        <% if avatar == current_user.avatar %>
-          <li><%= link_to image_tag(avatar.image_path, class: "avatar-select", id: "active-avatar"), user_avatar_select_path(current_user, avatar), method: :post %></li>
-        <% else %>
-          <li><%= link_to image_tag(avatar.image_path, class: "avatar-select"), user_avatar_select_path(current_user, avatar), method: :post %></li>
-        <% end %>
-      <% end %>
-    </ul>
-  </div>
-
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= devise_error_messages! %>
 
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true %>
-    </div>
+    <div class="edit-fields-wrapper">
+      <div class="field">
+        <%= f.label "Email*" %><br />
+        <%= f.email_field :email, autofocus: true %>
+      </div>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-    <% end %>
-
-    <div>
-      <%= f.label :username %><br />
-      <%= f.text_field :username %>
-    </div>
-
-    <div>
-      <%= f.label :first_name %><br />
-      <%= f.text_field :first_name %>
-    </div>
-
-    <div>
-      <%= f.label :last_name %><br />
-      <%= f.text_field :last_name %>
-    </div>
-
-    <div>
-      <%= f.label :age %><br />
-      <%= f.text_field :age %>
-    </div>
-
-    <div class="field">
-      <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-      <%= f.password_field :password, autocomplete: "off" %>
-      <% if @minimum_password_length %>
-        <br />
-        <em><%= @minimum_password_length %> characters minimum</em>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
       <% end %>
-    </div>
 
-    <div class="field">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "off" %>
+      <div>
+        <%= f.label "Username*" %><br />
+        <%= f.text_field :username %>
+      </div>
+
+      <div>
+        <%= f.label "First Name*" %><br />
+        <%= f.text_field :first_name %>
+      </div>
+
+      <div>
+        <%= f.label "Last Name*" %><br />
+        <%= f.text_field :last_name %>
+      </div>
+
+      <div>
+        <%= f.label "Age*" %><br />
+        <%= f.text_field :age %>
+      </div>
+
+      <div>
+        <%= f.label "Profile image URL*" %><br />
+        <%= f.text_field :image_path %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+        <%= f.password_field :password, autocomplete: "off" %>
+        <% if @minimum_password_length %>
+          <br />
+          <em><%= @minimum_password_length %> characters minimum</em>
+        <% end %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "off" %>
+      </div>
+
     </div>
 
     <div class="actions">
       <%= f.submit "Update" %>
     </div>
   <% end %>
+
   <br>
   <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 

@@ -6,16 +6,23 @@ class User < ActiveRecord::Base
 
   devise :omniauthable, :omniauth_providers => [:facebook]
 
+  validates_presence_of :username, :first_name, :last_name, :age, :on => :update
+
   has_many :decisions, foreign_key: "author_id"
   has_many :discussions, foreign_key: "author_id"
   has_many :votes, foreign_key: "voter_id"
   has_many :voted_decisions, through: :votes, source: :decision
+  #avadakedavra
   belongs_to :avatar, optional: true
   accepts_nested_attributes_for :decisions
 
   scope :by_signup, -> {order(id: :asc)}
   scope :most_indecisive, -> {joins(:decisions).group("users.id").order("count(users.id) DESC")}
   scope :most_decisive, -> {joins(:votes).group("users.id").order("count(users.id) DESC")}
+
+  def own_decision()
+
+  end
 
   def vote_content(passed_decision)
     v = current_vote_for(passed_decision)
@@ -48,10 +55,6 @@ class User < ActiveRecord::Base
     decisions.order(id: :desc).take
   end
 
-  def avatar_display
-    avatar.capitalize + '-icon.png'
-  end
-
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       names = auth.info.name.split(' ')
@@ -59,9 +62,8 @@ class User < ActiveRecord::Base
       user.password = Devise.friendly_token[0,20]
       user.first_name = names[0]
       user.last_name = names[1]
-
+      user.image_path = "http://graph.facebook.com/#{user.uid}/picture?type=large"
       user.save
-      user.avatar = Avatar.create(name: auth.info.name, image_path: "http://graph.facebook.com/#{user.uid}/picture?type=large")
     end
   end
 

@@ -30,6 +30,16 @@ class DecisionsController < ApplicationController
     end
   end
 
+  def edit
+    @decision = Decision.find_by_id(params[:id])
+  end
+
+  def update
+    @decision = Decision.find_by_id(params[:id])
+    @decision.update(decision_params)
+    redirect_to root_path
+  end
+
   def destroy
     @decision = Decision.find_by_id(params[:id])
     @decision.destroy

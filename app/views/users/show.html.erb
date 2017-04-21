@@ -5,7 +5,7 @@
   <div class="profile-wrapper">
 
     <div class="user-info">
-      <%= image_tag current_user.avatar.image_path, id: "profile-show-avatar" if current_user.avatar %>
+      <%= image_tag @user.image_path, class: "profile-show-avatar" if current_user.image_path %>
       <h2><strong><%= @user.username %></strong></h2>
       <h3><%= link_to "View all of #{@user.username}'s dilemmas", user_decisions_path(@user.id) %></h3>
       <h3>Decisions Made: <%= @user.number_of_decisions_made %></h3>
