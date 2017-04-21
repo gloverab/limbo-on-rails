@@ -17,7 +17,8 @@ class DiscussionsController < ApplicationController
     if @discussion.save
       redirect_to decisions_path
     else
-      flash[:notice] = "Uh oh! Looks like you didn't fill everything in. Please have a second look, and we'll be happy to help you make up your mind."
+      flash[:notice] = "Please fill in all the required fields!"
+      redirect_to :back
     end
   end
 

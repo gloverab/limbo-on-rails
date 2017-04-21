@@ -1,0 +1,12 @@
+<div class="card">
+  <% @discussions.each do |discussion| %>
+    <%= link_to discussion do %>
+      <div class="discussion-box group">
+        <%= image_tag discussion.author.image_path, class: "discussion-index-avatar" %>
+        <p><%= discussion.replies.count %> people are discussing <%= discussion.author.username %>'s question:</p>
+        <p><%= discussion.decision.title %></p>
+      </div>
+    <% end %>
+  <% end %>
+  <p class="right"><%= link_to "View all discussions", discussions_path %></p>
+</div>

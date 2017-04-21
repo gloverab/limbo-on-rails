@@ -1,4 +1,5 @@
 class DecisionsController < ApplicationController
+  before_action :set_discussions
 
   def index
     if params[:user_id]
@@ -26,7 +27,8 @@ class DecisionsController < ApplicationController
     if @decision.save
       redirect_to decisions_path
     else
-      flash[:notice] = "Uh oh! Looks like you didn't fill everything in. Please have a second look, and we'll be happy to help you make up your mind."
+      flash[:notice] = "Please fill in all the required fields!"
+      redirect_to :back
     end
   end
 
@@ -50,6 +52,10 @@ class DecisionsController < ApplicationController
 
   def decision_params
     params.require(:decision).permit(:title, :content, :hours, :minutes, :option_1, :option_2, :deadline, :options_attributes => [:content])
+  end
+
+  def set_discussions
+    @discussions = Discussion.all.limit(5)
   end
 
 end

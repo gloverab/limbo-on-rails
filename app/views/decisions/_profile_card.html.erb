@@ -1,4 +1,4 @@
-<div class="profile-card">
+<div class="profile-card card">
   <%= image_tag current_user.image_path, id: "profile-card-avatar" if current_user.image_path %>
   <h2>Welcome @<%= current_user.username %>!</h2>
   <h3>Decisions Made: <%= current_user.number_of_decisions_made %></h3>

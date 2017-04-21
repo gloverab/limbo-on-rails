@@ -33,6 +33,7 @@ article h5 a {
   position: relative;
   border: 1px solid #3b4049;
   width: 95%;
+  max-width: 1050px;
   display: block;
   margin: 0 auto;
 }
@@ -45,10 +46,13 @@ article h5 a {
   right: 0;
 }
 
-.profile-card {
+.left-cards {
+  float: left;
+}
+
+.card {
   position: relative;
   padding: 5px;
-  float: left;
   min-width: 400px;
   max-width: 410px;
   margin-top: 15px;
@@ -66,6 +70,7 @@ article h5 a {
 }
 
 .new_decision {
+  color: #25282E;
   text-align: center;
   display: block;
   margin: 0 auto;
@@ -104,9 +109,43 @@ article h5 a {
 .view-discussion {
   width: 100%;
   display: block;
-  /*margin: 0 auto;*/
   text-align: center;
   margin-bottom: 15px;
+}
+
+.vote-btn {
+  background-color: #F5A241;
+  display: inline-block;
+  text-align: center;
+  font-size: 1em;
+  width: 90%;
+  height: 50px;
+  margin: 0;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.vote-selected-btn {
+  background-color: #7FBEEB;
+  border: none;
+}
+
+.vote-rejected-btn {
+  color: #aaaaaa;
+  background-color: transparent;
+  border: 1px solid #aaaaaa;
+}
+
+.form-wrapper {
+  position: relative;
+  border: 1px solid #ED9F13;
+  border-radius: 4px;
+  background-color: #dddddd;
+  color: #25282E;
+}
+
+.form-wrapper input {
+  border: 1px solid #25282E;
 }
 
 #new-dilemma {
@@ -149,29 +188,6 @@ article h5 a {
 
 #show-decision {
   height: 600px;
-}
-
-.vote-btn {
-  background-color: #F5A241;
-  display: inline-block;
-  text-align: center;
-  font-size: 1em;
-  width: 90%;
-  height: 50px;
-  margin: 0;
-  padding: 5px;
-  border-radius: 4px;
-}
-
-.vote-selected-btn {
-  background-color: #7FBEEB;
-  border: none;
-}
-
-.vote-rejected-btn {
-  color: #aaaaaa;
-  background-color: transparent;
-  border: 1px solid #aaaaaa;
 }
 
 #vote-btn-wrapper {

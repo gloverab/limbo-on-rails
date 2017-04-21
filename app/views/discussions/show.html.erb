@@ -34,8 +34,8 @@
         <%= form_for @discussion do |f| %>
           <%= f.fields_for :reply do |rep| %>
           <div class="field">
-            <%= rep.text_field :content, id: "new_reply", placeholder: "give your input..." %>
-            <%= f.submit "+", id: "decision_title_submit" %>
+            <%= rep.text_field :content, class: "new_reply", placeholder: "give your input..." %>
+            <%= f.submit "+", id: "reply_submit" %>
           </div>
           <% end %>
         <% end %>
@@ -46,8 +46,8 @@
 
         <% if reply.author %>
           <div class="reply-box group">
-            <%= image_tag reply.author.image_path, id: 'reply-show-avatar' %>
-            <h3><%= reply.content %> -@<%= reply.author.username %></h3>
+            <%= image_tag reply.author.image_path, class: 'reply-show-avatar' %>
+            <h3><%= reply.content %> | @<%= link_to reply.author.username, reply.author %></h3>
             <div class="reply-details">
               <h5><%= reply.author ? (link_to reply.author.username, reply.author) : "a former user" %> posted this in response to <%= link_to @discussion.author.username, @discussion.author %> <%= link_to " - - delete", reply, method: :delete if reply.author == current_user %></h5>
             </div>

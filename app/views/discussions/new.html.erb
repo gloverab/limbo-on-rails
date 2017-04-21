@@ -2,49 +2,51 @@
 
 <div class="center-column group">
   <div class="new-discussion">
-    <h1>New Discussion Quesion</h1>
-    <%= form_for @discussion do |f| %>
+    <div class="form-wrapper">
+      <h1>New Discussion Quesion</h1>
+      <%= form_for @discussion do |f| %>
 
-      <%= f.fields_for :decision do |dec| %>
+        <%= f.fields_for :decision do |dec| %>
 
-        <div class="field">
-          <%= dec.label :title %><br>
-          <%= dec.text_field :title, placeholder: "What's your question?" %>
+          <div class="field">
+            <%= dec.label :title %><br>
+            <%= dec.text_field :title, placeholder: "What's your question?" %>
+          </div>
+
+          <div class="field">
+            <%= f.label "Reason for discussion" %><br>
+            <%= f.text_area :reason, placeholder: "You can use this area to elaborate and pose a more thought-provoking question to the community in addition to your either/or decision." %>
+          </div>
+
+          <div class="field">
+            <%= dec.label :context %><br>
+            <%= dec.text_area :content, placeholder: "You can use this area to provide any additional details to your question that you might want to clue people in on." %>
+          </div>
+
+          <div class="field">
+            <%= dec.label :option_1 %><br>
+            <%= dec.text_field :option_1 %>
+          </div>
+
+          <div class="field">
+            <%= dec.label :option_2 %><br>
+            <%= dec.text_field :option_2 %>
+          </div>
+
+          <div class="field">
+            <%= dec.label "When do you need to have an answer by?" %><br>
+            <%= dec.number_field :hours, value: 0, class: "time-box" %>
+            <%= dec.label :hours %>
+            <%= dec.number_field :minutes, class: "time-box" %>
+            <%= dec.label :minutes %>
+          </div>
+        <% end %>
+
+        <div class="actions">
+          <%= f.submit "Create Discussion" %>
         </div>
 
-        <div class="field">
-          <%= f.label "Reason for discussion" %><br>
-          <%= f.text_area :reason, placeholder: "You can use this area to elaborate and pose a more thought-provoking question to the community in addition to your either/or decision." %>
-        </div>
-
-        <div class="field">
-          <%= dec.label :context %><br>
-          <%= dec.text_area :content, placeholder: "You can use this area to provide any additional details to your question that you might want to clue people in on." %>
-        </div>
-
-        <div class="field">
-          <%= dec.label :option_1 %><br>
-          <%= dec.text_field :option_1 %>
-        </div>
-
-        <div class="field">
-          <%= dec.label :option_2 %><br>
-          <%= dec.text_field :option_2 %>
-        </div>
-
-        <div class="field">
-          <%= dec.label "When do you need to have an answer by?" %><br>
-          <%= dec.number_field :hours, value: 0, class: "time-box" %>
-          <%= dec.label :hours %>
-          <%= dec.number_field :minutes, class: "time-box" %>
-          <%= dec.label :minutes %>
-        </div>
       <% end %>
-
-      <div class="actions">
-        <%= f.submit "Create Discussion" %>
-      </div>
-
-    <% end %>
+    </div>
   </div>
 </div>

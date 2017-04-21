@@ -2,9 +2,14 @@
 
 <div class="center-column group">
 
-  <%= render "profile_card" %>
-
-  <div class="decision-strip">
-    <%= render partial: 'decision_card', locals: {decision: @decision} %>
+  <div class="left-cards">
+    <%= render "profile_card" %>
+    <%= render partial: 'discussions/discussions_card' %>
   </div>
+
+    <div class="decision-strip">
+      <%= render partial: 'decision_card', locals: {decision: @decision} %>
+    </div>
+
+
 </div>

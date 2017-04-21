@@ -4,4 +4,8 @@ class Discussion < ApplicationRecord
   has_many :replies
   accepts_nested_attributes_for :decision
   accepts_nested_attributes_for :replies
+
+  validates_presence_of :reason
+
+  default_scope { order(id: :desc) }
 end
