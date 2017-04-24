@@ -1,7 +1,7 @@
 <div class="profile-card card">
   <%= image_tag current_user.image_path, id: "profile-card-avatar" if current_user.image_path %>
   <h2 class="profile-header">Hi @<%= current_user.username %>!</h2>
-  <h3>Decisions Made: <%= current_user.number_of_decisions_made %></h3>
+  <h3>Votes Cast: <%= current_user.number_of_decisions_made %></h3>
   <h3>Dilemmas Posed: <%= current_user.number_of_dilemmas_posed %></h3>
   <br>
   <ul>

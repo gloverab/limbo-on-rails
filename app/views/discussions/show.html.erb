@@ -7,7 +7,7 @@
     <div class="discussion-user">
       <%= image_tag @discussion.author.image_path, class: "profile-show-avatar" if @discussion.author.image_path %>
       <h2><strong><%= @discussion.author.username %></strong></h2>
-      <h3>Decisions Made: <%= @discussion.author.number_of_decisions_made %></h3>
+      <h3>Votes Cast: <%= @discussion.author.number_of_decisions_made %></h3>
       <h3>Dilemmas Posed: <%= @discussion.author.number_of_dilemmas_posed %></h3>
       <br>
       <ul>

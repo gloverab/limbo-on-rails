@@ -20,10 +20,6 @@ class User < ActiveRecord::Base
   scope :most_indecisive, -> {joins(:decisions).group("users.id").order("count(users.id) DESC")}
   scope :most_decisive, -> {joins(:votes).group("users.id").order("count(users.id) DESC")}
 
-  def own_decision()
-
-  end
-
   def vote_content(passed_decision)
     v = current_vote_for(passed_decision)
     v.persuasion = true ? passed_decision.option_1 : passed_decision.option_2

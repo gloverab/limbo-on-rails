@@ -8,7 +8,7 @@
       <%= image_tag @user.image_path, class: "profile-show-avatar" if current_user.image_path %>
       <h2><strong><%= @user.username %></strong></h2>
       <h3><%= link_to "View all of #{@user.username}'s dilemmas", user_decisions_path(@user.id) %></h3>
-      <h3>Decisions Made: <%= @user.number_of_decisions_made %></h3>
+      <h3>Votes Cast: <%= @user.number_of_decisions_made %></h3>
       <h3>Dilemmas Posed: <%= @user.number_of_dilemmas_posed %></h3>
       <br>
       <ul>
