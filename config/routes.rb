@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     get 'most_decisive', on: :collection
     post 'image_select', to: 'users#image_select'
     resources :decisions, only: [:index]
+    resources :discussions, only: [:index]
   end
   resources :options
   resources :replies

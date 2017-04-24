@@ -3,33 +3,17 @@
 <div class="center-column group">
 
 <div class="left-cards">
-  <%= render "profile_card" %>
+  <%= render "users/profile_card" %>
   <%= render 'discussions/discussions_card' %>
 </div>
 
   <div class="decision-strip">
     <% if !@user %>
-    <div class="new-decision-from-index">
-      <%= form_tag new_decision_path, method: :get do %>
-      <div class="field">
-        <%= text_field_tag :title, "", id: "new_from_index", placeholder: "What do you need help deciding?" %>
-        <%= submit_tag "+", id: "decision_title_submit" %>
-      </div>
-      <% end %>
-      <h3>Or, you can be a part of these decisions:</h3>
-    </div>
+      <%= render 'new_from_index' %>
     <% else %>
-    <div id="user-slide">
-      <%= image_tag @user.image_path, id: "user-slide-avatar" if @user.image_path %>
-      <h3><strong><%= link_to @user.username, @user %>'s dilemmas</strong></h3>
-      <p>
-        <%= @user.first_name %> <%= @user.last_name %>
-      </p>
-      <h3>Decisions Made: <%= @user.number_of_decisions_made %></h3>
-      <h3>Dilemmas Posed: <%= @user.number_of_dilemmas_posed %></h3>
-    </div>
+    <div class="user-slide">
+      <%= render 'user_decisions' %>
     <% end %>
-
     <% @decisions.each do |decision| %>
       <%= render partial: 'decision_card', locals: {decision: decision} %>
     <% end %>

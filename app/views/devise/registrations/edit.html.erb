@@ -1,5 +1,8 @@
 <div class="new_user">
   <h2>Edit <%= resource_name.to_s.humanize %></h2>
+  
+  <%= image_tag current_user.image_path, class: "edit-page-avatar" %>
+  <h5>Your current photo</h5>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= devise_error_messages! %>
