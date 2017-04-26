@@ -2,7 +2,7 @@
 
 ## Welcome to Limbo!
 
-Limbo is an app designed to help users make either/or decisions. _"Should I wear the red shirt or the blue shirt?" "What kind of cheese should I buy?"_ These are the questions we ask, and these are the questions we want answers for. If you want a more in depth answer or discussion, Limbo provides a discussion section that acts almost as a forum.
+Limbo is an app designed to help users make either/or decisions. _"Should I wear the red shirt or the blue shirt?" "What kind of cheese should I buy?"_ Once a question is submitted with a desired 'deadline' and optional context, other users in the community can vote on which option they see more fit. If a user wants a more in depth answer or discussion, Limbo provides a discussion section that acts almost as a forum.
 
 ## Installation
 
@@ -11,8 +11,9 @@ Limbo was built using ruby 2.3.3 and rails 5, though it will likely work with Ru
 To use Limbo, clone it and perform the following:
 * run `bundle install`
 * run `rake db:migrate`
-* run `rake db:seed`
-Since this is a social app, there is some seed data included in order to give you a feel for how the populated site would function.
+* that's it!
+
+Since this is a social-ish app, and works better with a community feel, there is some seed data included in order to give you a feel for how the populated site would function. Run `rake db:seed` to get the site populated.
 
 ## Using Limbo
 
