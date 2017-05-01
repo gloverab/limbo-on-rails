@@ -37,7 +37,7 @@ class DiscussionsController < ApplicationController
   private
 
   def discussion_params
-    params.require(:discussion).permit(:reason, decision_attributes:[:title, :content, :option_1, :option_2, :hours, :minutes])
+    params.require(:discussion).permit(:reason, decision_attributes: [:title, :content, :option_1, :option_2, :hours, :minutes])
   end
 
   def reply_params
