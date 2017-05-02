@@ -2,6 +2,20 @@
   <%=
   link_to(
     decision.send("option_#{option_number}"),
+    decision_vote_path(decision.id, persuasion: option_number),
+    method: :post,
+    class: ["vote-btn", ("vote-#{current_user.current_vote_for(decision).persuasion == option_number ? 'selected' : 'rejected'}-btn" if current_user.current_vote_for(decision))].join(' ')
+  )
+  %>
+  <br>
+  <%= link_to decision.send("votes_for_option_#{option_number}"), '/', class: "vote-count" %>
+</div>
+
+
+<!-- <div id="option-box-<%= option_number %>">
+  <%=
+  link_to(
+    decision.send("option_#{option_number}"),
     decision_vote_path(decision.id, persuasion: [true, false][option_number - 1]),
     method: :post,
     class: ["vote-btn", ("vote-#{current_user.current_vote_for(decision).persuasion ? ['selected', 'rejected'][option_number - 1] : ['rejected', 'selected'][option_number - 1]}-btn" if current_user.current_vote_for(decision))].join(' ')
@@ -9,4 +23,4 @@
   %>
   <br>
   <%= link_to decision.send("votes_for_option_#{option_number}"), '/', class: "vote-count" %>
-</div>
+</div> -->

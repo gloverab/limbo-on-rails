@@ -17,11 +17,11 @@ class Decision < ActiveRecord::Base
   end
 
   def votes_for_option_1
-    votes.where(persuasion: true).count
+    votes.where(persuasion: 1).count
   end
 
   def votes_for_option_2
-    votes.where(persuasion: false).count
+    votes.where(persuasion: 2).count
   end
 
 end

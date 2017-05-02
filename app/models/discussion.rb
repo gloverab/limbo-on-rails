@@ -11,4 +11,5 @@ class Discussion < ApplicationRecord
   def decision_attributes=(decision_attributes)
     self.build_decision(decision_attributes)
   end
+
 end
