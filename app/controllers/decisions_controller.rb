@@ -17,6 +17,10 @@ class DecisionsController < ApplicationController
 
   def new
     @decision = Decision.new(title: params[:title] || "Your Question Here")
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   def create

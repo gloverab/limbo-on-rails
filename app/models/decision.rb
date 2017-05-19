@@ -3,7 +3,7 @@ class Decision < ActiveRecord::Base
   belongs_to :discussion, optional: true
   has_many :votes
 
-  validates_presence_of :title, :content, :option_1, :option_2
+  validates_presence_of :title, :option_1, :option_2
 
   def deadline_calculator
     minutes = self.minutes || 0

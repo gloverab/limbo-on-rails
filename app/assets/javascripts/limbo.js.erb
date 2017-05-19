@@ -14,6 +14,9 @@ var attachListeners = function() {
   $('#user-strip').on('click', function(event) {
     showHistory(event)
   })
+  $('#decision_title_submit').on('click', function(event) {
+    newPostDropdown(event)
+  })
 }
 
 var scrollingCommands = function() {
@@ -117,6 +120,38 @@ function showHistory(event) {
   }
 }
 
+function newPostDropdown(event) {
+  event.preventDefault()
+
+  $('#decision_title_submit').animate({  borderSpacing: 90 }, {
+    step: function(now,fx) {
+      $(this).css('-webkit-transform','rotate('+now+'deg)');
+      $(this).css('-moz-transform','rotate('+now+'deg)');
+      $(this).css('transform','rotate('+now+'deg)');
+      },
+      duration:'slow'
+  },'linear')
+
+  $("#title-field-only").animate({
+    left: 16,
+  },200,'linear')
+
+  var titleText = $('#new_from_index')[0].value
+
+  $.ajax({
+    url: '/decisions/new',
+    type: "GET",
+    data: {
+      title: titleText
+    },
+    success: function() {
+      $('#limit').animate({
+        height: $(`#append-form`).height()
+      },400)
+    }
+  })
+}
+
 function makeDecisionsList(decisions) {
   var decisionsList = "<div id='limit'><div id='show-history'><br><h3>Asked:</h3><ul>"
   $.each(decisions, function(index, item){
@@ -131,8 +166,4 @@ function makeVotedList(votedDecisions) {
     votedList += `<li>${item.title}</li>`
   })
   return votedList += "</ul></div></div>"
-}
-
-function hide(thingToHide) {
-
 }

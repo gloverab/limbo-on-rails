@@ -1,0 +1,32 @@
+<%= form_for @decision do |f| %>
+<%= f.hidden_field :title, value: @decision.title %>
+
+
+<div class="field">
+  <%= f.label :content %><br>
+  <%= f.text_area :content, placeholder: "Ask the universe any either/or question (i.e. 'should I watch The Room or Rocky Horror Picture Show?')" %>
+</div>
+
+<div class="field">
+  <%= f.label :option_1 %><br>
+  <%= f.text_field :option_1, placeholder: "The Room" %>
+</div>
+
+<div class="field">
+  <%= f.label :option_2 %><br>
+  <%= f.text_field :option_2, placeholder: "Rocky Horror Picture Show" %>
+</div>
+
+<div class="field">
+  <%= f.label "When do you need to have an answer by?" %><br>
+  <%= f.number_field :hours, value: 0, class: "time-box" %>
+  <%= f.label :hours %>
+  <%= f.number_field :minutes, value: 0, class: "time-box" %>
+  <%= f.label :minutes %>
+</div>
+
+<div class="actions">
+  <%= f.submit "Ask!" %>
+</div>
+
+<% end %>
