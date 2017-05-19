@@ -14,8 +14,12 @@
     <div class="user-slide">
       <%= render 'user_decisions' %>
     <% end %>
-    <% @decisions.each do |decision| %>
-      <%= render partial: 'decision_card', locals: {decision: decision} %>
-    <% end %>
+    <div id="just-decisions">
+      <% @decisions.each do |decision| %>
+        <div id="decision-wrapper-<%= decision.id %>">
+          <%= render partial: 'decision_card', locals: {decision: decision} %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

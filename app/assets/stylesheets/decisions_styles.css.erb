@@ -8,7 +8,7 @@ textarea {
 article {
   position: relative;
   width: 100%;
-  min-height: 160px;
+  min-height: 180px;
   display: block;
   margin: 0 auto;
   margin-bottom: 15px;
@@ -51,6 +51,12 @@ article h5 a {
 
 .left-cards {
   float: left;
+}
+
+.left-cards-fix {
+  margin-top: -73px;
+  position: fixed;
+  display: inline;
 }
 
 .card {
@@ -107,6 +113,7 @@ article h5 a {
   padding: 2px 5px 0 5px;
   border-bottom-left-radius: 6px;
   margin-bottom: 30px;
+  top: 0;
 }
 
 .view-discussion {
@@ -128,12 +135,19 @@ article h5 a {
   border-radius: 4px;
 }
 
+.option-box-wrapper a:hover {
+  color: #25282E;
+  background-color: #7FBEEB;
+}
+
 .vote-selected-btn {
   background-color: #7FBEEB;
   border: none;
 }
 
 .vote-rejected-btn {
+  width: 88%;
+  height: 47px;
   color: #aaaaaa;
   background-color: transparent;
   border: 1px solid #aaaaaa;
@@ -149,6 +163,16 @@ article h5 a {
 
 .form-wrapper input {
   border: 1px solid #25282E;
+}
+
+.option-selected-votes {
+  margin-bottom: 30px;
+  background-color: #7FBEEB;
+  display: inline-block;
+}
+
+.option-rejected-votes {
+  display: none;
 }
 
 #new-dilemma {

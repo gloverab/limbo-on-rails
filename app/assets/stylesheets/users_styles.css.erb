@@ -40,14 +40,15 @@
   border: 1px solid #aaaaaa;
   margin-bottom: 4px;
   color: #25282E;
+  transition: all .1s ease-in-out;
 }
 
 .user-box:hover {
   background-color: #eeeeee;
 }
 
-.user-box h3:hover {
-  color: #F5A241;
+.user-show-history.in {
+  transition: all .1s ease-in-out;
 }
 
 .user-info {
@@ -102,4 +103,10 @@
   padding: 0;
   list-style: none;
   font-size: .75em;
+}
+
+#limit {
+  height: 0;
+  position: relative;
+  overflow: hidden;
 }

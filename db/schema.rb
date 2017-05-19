@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170502131832) do
+ActiveRecord::Schema.define(version: 20170518201207) do
 
   create_table "avatars", force: :cascade do |t|
     t.string  "name"
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 20170502131832) do
     t.string   "option_2"
     t.integer  "author_id"
     t.integer  "discussion_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "discussions", force: :cascade do |t|
@@ -79,11 +81,13 @@ ActiveRecord::Schema.define(version: 20170502131832) do
   end
 
   create_table "votes", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "decision_id"
-    t.integer "option_id"
-    t.integer "voter_id"
-    t.integer "persuasion"
+    t.integer  "user_id"
+    t.integer  "decision_id"
+    t.integer  "option_id"
+    t.integer  "voter_id"
+    t.integer  "persuasion"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

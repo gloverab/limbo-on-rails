@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   end
 
   def interactions
-    (voted_decisions + decisions).uniq
+    (voted_decisions + decisions).sort_by { |x| x.created_at }
   end
 
   def number_of_decisions_made

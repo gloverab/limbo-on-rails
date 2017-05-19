@@ -1,14 +1,18 @@
-<div id="option-box-<%= option_number %>">
-  <%=
+<div id="option-box-<%= option_number %>" class="option-box" data-parent="<%= decision.id %>">
+  <%= require 'pry'
   link_to(
     decision.send("option_#{option_number}"),
-    decision_vote_path(decision.id, persuasion: option_number),
-    method: :post,
-    class: ["vote-btn", ("vote-#{current_user.current_vote_for(decision).persuasion == option_number ? 'selected' : 'rejected'}-btn" if current_user.current_vote_for(decision))].join(' ')
+    '/',
+    id: "decision-#{decision.id}-option-#{option_number}",
+    class: ["vote-btn", ("vote-#{current_user.current_vote_for(decision).persuasion == option_number ? 'selected' : 'rejected'}-btn" if current_user.current_vote_for(decision)),("can-vote" if decision.author != current_user)].join(' ')
   )
   %>
   <br>
-  <%= link_to decision.send("votes_for_option_#{option_number}"), '/', class: "vote-count" %>
+  <%= link_to(
+    decision.send("votes_for_option_#{option_number}"),
+    '/',
+    id: "decision-#{decision.id}-option-#{option_number}-votes",
+    class: ["vote-count", ("option-#{current_user.current_vote_for(decision).persuasion == option_number ? 'selected' : 'rejected'}-votes" if current_user.current_vote_for(decision))].join(' ')) %>
 </div>
 
 

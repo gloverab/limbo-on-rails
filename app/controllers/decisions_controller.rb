@@ -51,7 +51,7 @@ class DecisionsController < ApplicationController
   private
 
   def decision_params
-    params.require(:decision).permit(:title, :content, :hours, :minutes, :option_1, :option_2, :deadline, :options_attributes => [:content])
+    params.require(:decision).permit(:title, :content, :hours, :minutes, :option_1, :option_2, :created_at, :updated_at, :deadline, :options_attributes => [:content])
   end
 
   def set_discussions

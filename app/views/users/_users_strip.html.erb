@@ -1,11 +1,14 @@
 <div id="user-strip" class="user-strip">
   <% @users.each do |user| %>
     <%= link_to user do %>
-      <div class="user-box group">
+      <div class="user-box group" id="user-box-user-<%= user.id %>">
         <%= image_tag user.image_path, id: "user-slide-avatar" if user.image_path %>
         <h3><strong><%= user.username %></strong> - <%= user.first_name %> <%= user.last_name %></h3>
         <p>Votes Cast: <%= user.number_of_decisions_made %></p>
         <p>Dilemmas Posed: <%= user.number_of_dilemmas_posed %></p>
+
+        <div class="user-show-history" id="user-<%= user.id %>-show-history"></div>
+
       </div>
     <% end %>
   <% end %>
