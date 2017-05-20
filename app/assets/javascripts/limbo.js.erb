@@ -49,11 +49,11 @@ function doVote(event) {
     $(`#decision-wrapper-${decisionId} .vote-btn`).toggleClass("vote-selected-btn vote-rejected-btn")
 
     // Animating in or out!
-    $(`#decision-wrapper-${decisionId} #${persuasion}`).animate({
+    $(`#decision-wrapper-${decisionId} #${persuasion}`).velocity({
       width: '93%',
       height: 54
     }, 50)
-    $(`#decision-wrapper-${decisionId} #decision-${decisionId}-option-${otherPersuasion}`).animate({
+    $(`#decision-wrapper-${decisionId} #decision-${decisionId}-option-${otherPersuasion}`).velocity({
       width: '89%',
       height: 48
     }, 50)
@@ -66,11 +66,11 @@ function doVote(event) {
     $(optionNotSelected).addClass("option-rejected-votes")
 
     // Animating in or out!
-    $(`#decision-wrapper-${decisionId} #${persuasion}`).addClass("vote-selected-btn").animate({
+    $(`#decision-wrapper-${decisionId} #${persuasion}`).addClass("vote-selected-btn").velocity({
       width: '93%',
       height: 54
     }, 50)
-    $(`#decision-wrapper-${decisionId} #decision-${decisionId}-option-${otherPersuasion}`).addClass("vote-rejected-btn").animate({
+    $(`#decision-wrapper-${decisionId} #decision-${decisionId}-option-${otherPersuasion}`).addClass("vote-rejected-btn").velocity({
       width: '89%',
       height: 48
     }, 50)
@@ -112,7 +112,7 @@ function showHistory(event) {
       type: "GET",
       success: function(data) {
         $(`#user-${userId}-show-history`)[0].innerHTML = makeDecisionsList(data.decisions) + makeVotedList(data.voted_decisions)
-        $('#limit').animate({
+        $('#limit').velocity({
           height: $(`#show-history`).height()
         },110)
       }
@@ -123,33 +123,46 @@ function showHistory(event) {
 function newPostDropdown(event) {
   event.preventDefault()
 
-  $('#decision_title_submit').animate({  borderSpacing: 90 }, {
-    step: function(now,fx) {
-      $(this).css('-webkit-transform','rotate('+now+'deg)');
-      $(this).css('-moz-transform','rotate('+now+'deg)');
-      $(this).css('transform','rotate('+now+'deg)');
+  if ($('#append-form').html() == "") {
+
+    var titleText = $('#new_from_index')[0].value
+
+    $.ajax({
+      url: '/decisions/new',
+      type: "GET",
+      data: {
+        title: titleText
       },
-      duration:'slow'
-  },'linear')
+      success: function() {
+        $('#limit').velocity({
+          height: $(`#append-form`).height()
+        },400)
+      }
+    })
 
-  $("#title-field-only").animate({
-    left: 16,
-  },200,'linear')
+    $('#decision_title_submit').animate({  borderSpacing: 90 }, {
+      step: function(now,fx) {
+        $(this).css('-webkit-transform','rotate('+now+'deg)');
+        $(this).css('-moz-transform','rotate('+now+'deg)');
+        $(this).css('transform','rotate('+now+'deg)');
+        },
+        duration:'slow'
+    },'linear')
 
-  var titleText = $('#new_from_index')[0].value
+    $("#title-field-only").velocity({
+      left: [16,0],
+    },150,'linear')
+  } else {
+    $('#limit').velocity({
+      height: 0
+    },100,'linear')
 
-  $.ajax({
-    url: '/decisions/new',
-    type: "GET",
-    data: {
-      title: titleText
-    },
-    success: function() {
-      $('#limit').animate({
-        height: $(`#append-form`).height()
-      },400)
-    }
-  })
+    $('#append-form')[0].innerHTML = ''
+
+    $("#title-field-only").velocity({
+      left: [0,16],
+    },150,'linear')
+  }
 }
 
 function makeDecisionsList(decisions) {
