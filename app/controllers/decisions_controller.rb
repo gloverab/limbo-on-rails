@@ -6,7 +6,7 @@ class DecisionsController < ApplicationController
       @user = User.find(params[:user_id])
       @decisions = @user.decisions.order(id: :desc)
     else
-      @decisions = Decision.all.order(id: :desc)
+      @decisions = Decision.all.order(id: :desc).limit(20)
     end
     @decision = Decision.new
   end
@@ -27,12 +27,14 @@ class DecisionsController < ApplicationController
     @decision = Decision.new(decision_params)
     @decision.deadline = @decision.deadline_calculator
     @decision.author = current_user
-    # binding.pry
-    if @decision.save
-      redirect_to decisions_path
-    else
-      flash[:notice] = "Please fill in all the required fields!"
-      redirect_to :back
+
+    respond_to do |format|
+      if @decision.save
+        format.html
+        format.js
+      else
+        flash[:notice] = "Please fill in all the required fields!"
+      end
     end
   end
 

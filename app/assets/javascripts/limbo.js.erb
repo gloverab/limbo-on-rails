@@ -114,7 +114,7 @@ function showHistory(event) {
         $(`#user-${userId}-show-history`)[0].innerHTML = makeDecisionsList(data.decisions) + makeVotedList(data.voted_decisions)
         $('#limit').velocity({
           height: $(`#show-history`).height()
-        },110)
+        },600, 'spring')
       }
     })
   }
@@ -138,7 +138,7 @@ function newPostDropdown(event) {
           height: $(`#append-form`).height()
         },400)
       }
-    })
+    }).done(addSubmit)
 
     $('#decision_title_submit').animate({  borderSpacing: 90 }, {
       step: function(now,fx) {
@@ -153,16 +153,24 @@ function newPostDropdown(event) {
       left: [16,0],
     },150,'linear')
   } else {
-    $('#limit').velocity({
-      height: 0
-    },100,'linear')
-
-    $('#append-form')[0].innerHTML = ''
-
-    $("#title-field-only").velocity({
-      left: [0,16],
-    },150,'linear')
+    clearFields()
   }
+}
+
+function createDilemma(event) {
+  event.preventDefault()
+
+  var values = $('#new_decision').serialize()
+
+  $.ajax({
+    url: '/decisions',
+    method: "POST",
+    data: values,
+    dataType: "script",
+    success: function(){
+      clearFields()
+    }
+  }).done(flashNew)
 }
 
 function makeDecisionsList(decisions) {
@@ -179,4 +187,39 @@ function makeVotedList(votedDecisions) {
     votedList += `<li>${item.title}</li>`
   })
   return votedList += "</ul></div></div>"
+}
+
+function addSubmit() {
+  $("#submit-from-index").on("click", function(event) {
+    createDilemma(event)
+  })
+}
+
+function flashNew() {
+  $('#just-decisions').children().first().velocity({
+    backgroundColor: ['#DDDDDD', '#FFFFFF']
+  },800)
+}
+
+function clearFields() {
+  $('li#flash-li')[0].innerHTML = ''
+  $('#new_from_index')[0].value = ''
+  $('#limit').velocity({
+    height: 0
+  },5,'linear')
+
+  $('#append-form')[0].innerHTML = ''
+
+  $("#title-field-only").velocity({
+    left: [0,16],
+  },150,'linear')
+
+  $('#decision_title_submit').animate({  borderSpacing: -90 }, {
+    step: function(now,fx) {
+      $(this).css('-webkit-transform','rotate('+now+'deg)');
+      $(this).css('-moz-transform','rotate('+now+'deg)');
+      $(this).css('transform','rotate('+now+'deg)');
+      },
+      duration:'slow'
+  },'linear')
 }
