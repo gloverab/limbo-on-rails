@@ -5,8 +5,14 @@ class DecisionsController < ApplicationController
     if params[:user_id]
       @user = User.find(params[:user_id])
       @decisions = @user.decisions.order(id: :desc)
+    elsif params[:id]
+      @decisions = Decision.where('id < ?', params[:id]).order(id: :desc).limit(10)
     else
-      @decisions = Decision.all.order(id: :desc).limit(20)
+      @decisions = Decision.all.order(id: :desc).limit(15)
+    end
+    respond_to do |format|
+      format.html
+      format.js
     end
     @decision = Decision.new
   end

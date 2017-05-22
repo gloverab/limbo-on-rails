@@ -1,42 +1,44 @@
-<article class="group" id="decision-<%= decision.id %>">
-  <%= link_to image_tag(decision.author.image_path, class: "article-avatar"), decision.author if decision.author  %>
-  <h2><strong>"</strong><%= decision.title %><strong>"</strong></h2>
+<div id="decision-wrapper-<%= decision.id %>">
+  <article class="group" id="decision-<%= decision.id %>">
+    <%= link_to image_tag(decision.author.image_path, class: "article-avatar"), decision.author if decision.author  %>
+    <h2><strong>"</strong><%= decision.title %><strong>"</strong></h2>
 
-  <div id="vote-btn-wrapper">
-    <% if !current_user.voted_decisions.include?(decision) %>
-      <% if decision.content.length > 100 %>
-        <h5><%= truncate(decision.content, length: 80) %>
-          <%= link_to '[read more]', '', class: "read-more-#{decision.id}" %>
-      <script>
+    <div id="vote-btn-wrapper">
+      <% if !current_user.voted_decisions.include?(decision) %>
+        <% if decision.content.length > 100 %>
+          <h5><%= truncate(decision.content, length: 80) %>
+            <%= link_to '[read more]', '', class: "read-more-#{decision.id}" %>
+        <script>
+          $('.read-more-<%= decision.id %>').on('click', function(e) {
+            e.preventDefault()
+            $(this).parent().html('<%= escape_javascript decision.content %>')
+          })
+        </script></h5>
+        <% else %>
+          <h5><%= decision.content %></h5>
+        <% end %>
+
+        <%= render partial: 'votes/option_boxes', locals: {decision: decision} %>
+
+      <% else %>
+      <h5>You've already voted on this question. <%= link_to 'view original content', '', class: "read-more-#{decision.id}" %> <%= "or" if decision.discussion && current_user.current_vote_for(decision) %> <%= link_to "Join the discussion→", decision.discussion if decision.discussion && current_user.current_vote_for(decision) %><script>
         $('.read-more-<%= decision.id %>').on('click', function(e) {
           e.preventDefault()
-          $(this).parent().html('<%= escape_javascript decision.content %>')
+          $(this).parent().html('<%= escape_javascript decision.content %> <%= link_to "Join the discussion→", decision.discussion if decision.discussion && current_user.current_vote_for(decision) %>')
         })
       </script></h5>
-      <% else %>
-        <h5><%= decision.content %></h5>
+
+        <%= render partial: 'votes/option_boxes', locals: {decision: decision} %>
+
       <% end %>
-
-      <%= render partial: 'votes/option_boxes', locals: {decision: decision} %>
-
-    <% else %>
-    <h5>You've already voted on this question. <%= link_to 'view original content', '', class: "read-more-#{decision.id}" %> <%= "or" if decision.discussion && current_user.current_vote_for(decision) %> <%= link_to "Join the discussion→", decision.discussion if decision.discussion && current_user.current_vote_for(decision) %><script>
-      $('.read-more-<%= decision.id %>').on('click', function(e) {
-        e.preventDefault()
-        $(this).parent().html('<%= escape_javascript decision.content %> <%= link_to "Join the discussion→", decision.discussion if decision.discussion && current_user.current_vote_for(decision) %>')
-      })
-    </script></h5>
-
-      <%= render partial: 'votes/option_boxes', locals: {decision: decision} %>
-
-    <% end %>
-  </div>
-  <br>
-  <div id="decision-details">
-    <% if Time.now < decision.deadline %>
-      <h5><%= link_to decision.author.username, decision.author if decision.author %> needs to know in <%= distance_of_time_in_words(Time.now, decision.deadline) %> <%= link_to "[edit]", edit_decision_path(decision) if decision.author == current_user %><%= link_to "[delete]", decision, method: :delete if decision.author == current_user %></h5>
-    <% else %>
-      <h5><%= decision.author ? (link_to decision.author.username, decision.author) : "a former user" %> needed to know by <%= decision.deadline.strftime("%I:%M %p") %> on <%= decision.deadline.strftime("%B %d, %Y") %>, and you're too late.<%= link_to "[delete]", decision, method: :delete if decision.author == current_user %></h5>
-    <% end %>
-  </div>
-</article>
+    </div>
+    <br>
+    <div id="decision-details">
+      <% if Time.now < decision.deadline %>
+        <h5><%= link_to decision.author.username, decision.author if decision.author %> needs to know in <%= distance_of_time_in_words(Time.now, decision.deadline) %> <%= link_to "[edit]", edit_decision_path(decision) if decision.author == current_user %><%= link_to "[delete]", decision, method: :delete if decision.author == current_user %></h5>
+      <% else %>
+        <h5><%= decision.author ? (link_to decision.author.username, decision.author) : "a former user" %> needed to know by <%= decision.deadline.strftime("%I:%M %p") %> on <%= decision.deadline.strftime("%B %d, %Y") %>, and you're too late.<%= link_to "[delete]", decision, method: :delete if decision.author == current_user %></h5>
+      <% end %>
+    </div>
+  </article>
+</div>

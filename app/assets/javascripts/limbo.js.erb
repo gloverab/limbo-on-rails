@@ -17,6 +17,9 @@ var attachListeners = function() {
   $('#decision_title_submit').on('click', function(event) {
     newPostDropdown(event)
   })
+  $('#show-more-index').on('click', function(event) {
+    showMore(event)
+  })
 }
 
 var scrollingCommands = function() {
@@ -25,6 +28,9 @@ var scrollingCommands = function() {
     leftCards.addClass("left-cards-fix")
   } else {
     leftCards.removeClass("left-cards-fix")
+  }
+  if($(this).scrollTop() == $(document).height() - $(this).height()) {
+    showMore(event)
   }
 }
 
@@ -114,7 +120,7 @@ function showHistory(event) {
         $(`#user-${userId}-show-history`)[0].innerHTML = makeDecisionsList(data.decisions) + makeVotedList(data.voted_decisions)
         $('#limit').velocity({
           height: $(`#show-history`).height()
-        },600, 'spring')
+        },[350,20])
       }
     })
   }
@@ -173,6 +179,22 @@ function createDilemma(event) {
   }).done(flashNew)
 }
 
+function showMore(event) {
+
+  event.preventDefault()
+
+  var lastId = $('article').last()[0].id.replace('decision-','')
+
+  $.ajax({
+    url: '/decisions',
+    method: "GET",
+    data: {
+      id: lastId
+    },
+    dataType: "script"
+  })
+}
+
 function makeDecisionsList(decisions) {
   var decisionsList = "<div id='limit'><div id='show-history'><br><h3>Asked:</h3><ul>"
   $.each(decisions, function(index, item){
@@ -206,7 +228,7 @@ function clearFields() {
   $('#new_from_index')[0].value = ''
   $('#limit').velocity({
     height: 0
-  },5,'linear')
+  },5)
 
   $('#append-form')[0].innerHTML = ''
 
@@ -220,6 +242,6 @@ function clearFields() {
       $(this).css('-moz-transform','rotate('+now+'deg)');
       $(this).css('transform','rotate('+now+'deg)');
       },
-      duration:'slow'
+      duration: 480
   },'linear')
 }

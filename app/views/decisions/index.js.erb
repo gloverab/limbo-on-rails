@@ -1,0 +1,5 @@
+<% @decisions.each do |decision| %>
+
+  $('#just-decisions').append("<%= j render partial: 'decision_card', locals: {decision: decision} %>")
+
+<% end %>
