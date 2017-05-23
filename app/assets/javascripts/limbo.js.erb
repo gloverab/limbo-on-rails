@@ -164,11 +164,9 @@ function newPostDropdown(event) {
         duration:'slow'
     },'linear')
 
-    $("#title-field-only").velocity({
-      left: [16,0],
-    },150,'linear')
   } else {
     clearFields()
+    removeShading()
   }
 }
 
@@ -185,7 +183,7 @@ function createDilemma(event) {
     success: function(){
       clearFields()
     }
-  }).done(flashNew)
+  }).done(flashNew).done(removeShading)
 }
 
 function showMore(event) {
@@ -230,6 +228,10 @@ function addShading() {
   $("#new-decision-from-index").addClass("light-shadow")
 }
 
+function removeShading() {
+  $("#new-decision-from-index").removeClass("light-shadow")
+}
+
 function flashNew() {
   $('article').first().velocity({
     backgroundColor: ['#ffffff', '#FFCA90'],
@@ -252,10 +254,6 @@ function clearFields() {
   },5)
 
   $('#append-form')[0].innerHTML = ''
-
-  $("#title-field-only").velocity({
-    left: [0,16],
-  },150,'linear')
 
   $('#decision_title_submit').animate({  borderSpacing: -90 }, {
     step: function(now,fx) {

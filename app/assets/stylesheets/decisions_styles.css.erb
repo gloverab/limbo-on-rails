@@ -33,7 +33,7 @@ article h5 a {
 
 .center-column {
   position: relative;
-  border: 1px solid #3b4049;
+  border: 1px solid #D7DBDD;
   width: 95%;
   max-width: 1050px;
   display: block;
@@ -70,7 +70,7 @@ article h5 a {
   /*border-radius: 2px;*/
   background-color: white;
   color: #25282E;
-  box-shadow: 1px 1px 2px #25282E;
+  box-shadow: 1px 1px 1px #25282E;
 }
 
 .profile-card ul {
@@ -210,25 +210,35 @@ article h5 a {
 }
 
 #decisions-header {
+  display: block;
   text-align: left;
   margin-top: 60px;
+  border-bottom: none;
 }
 
 #decisions-header ul {
-  list-style: none;
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
 }
 
 #decisions-header li {
   display: inline-block;
-  width: 120px;
+  /*width: 130px;*/
 }
 
-#decisions-header a {
-  color: #25282E;
+#decisions-header ul li a{
+  transition: all 0.15s linear 0s;
+  padding: 0px 20px;
+  line-height: 50px;
+  text-decoration: none;
+  display: block;
 }
 
 #decisions-header a:hover {
-  color: #F58340;
+  color: #25282E;
+  box-shadow: inset 0 -5px 0 #25282E;
 }
 
 #show-decision {
@@ -291,5 +301,6 @@ article h5 a {
 }
 
 #title-field-only {
+  left: 16px;
   position: relative;
 }
