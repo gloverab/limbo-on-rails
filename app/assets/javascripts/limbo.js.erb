@@ -39,6 +39,7 @@ function doVote(event) {
   var persuasion = event.target.id
   var persuasionNum = persuasion.replace(`decision-${decisionId}-option-`,'')
   var otherPersuasion = persuasionNum === '1' ? '2' : '1'
+  var divFlashMessage = $(`#decision-wrapper-${decisionId} .flash-message`)
   var canVote = $(`#decision-wrapper-${decisionId} .vote-btn`).hasClass("can-vote")
   var hasRejected = $(`#decision-wrapper-${decisionId} #${persuasion}`).hasClass("vote-rejected-btn")
   var hasSelected = $(`#decision-wrapper-${decisionId} #${persuasion}`).hasClass("vote-selected-btn")
@@ -64,7 +65,9 @@ function doVote(event) {
       height: 48
     }, 400, 'spring')
 
-    $('li#flash-li')[0].innerHTML = "You just switched your vote!"
+    divFlashMessage.html("You just switched your vote!").delay(500).fadeOut(1000, function() {
+      $(this).empty().show()
+    })
 
   } else if (canVote && notVotedYet) {
     // Switching the way the vote count looks
@@ -83,9 +86,15 @@ function doVote(event) {
     $('li#flash-li')[0].innerHTML = "Ay! Good choice!"
 
   } else if (hasSelected) {
-    $('li#flash-li')[0].innerHTML = " AY! You already voted for this! "
+    divFlashMessage.html("AY! You already voted for this!").delay(500).fadeOut(1000, function() {
+      $(this).empty().show()
+    })
+    flashPage()
   } else if (!canVote) {
-    $('li#flash-li')[0].innerHTML = "You can't vote on your own post!"
+    divFlashMessage.html("You can't vote on your own post!").delay(500).fadeOut(1000, function() {
+      $(this).empty().show()
+    })
+    flashPage()
   }
 
   event.preventDefault()
@@ -144,7 +153,7 @@ function newPostDropdown(event) {
           height: $(`#append-form`).height()
         },400)
       }
-    }).done(addSubmit)
+    }).done(addSubmit).done(addShading)
 
     $('#decision_title_submit').animate({  borderSpacing: 90 }, {
       step: function(now,fx) {
@@ -217,11 +226,22 @@ function addSubmit() {
   })
 }
 
+function addShading() {
+  $("#new-decision-from-index").addClass("light-shadow")
+}
+
 function flashNew() {
   $('article').first().velocity({
     backgroundColor: ['#ffffff', '#FFCA90'],
     opacity: 1
   },900, 'ease-in-out')
+}
+
+function flashPage() {
+  $('body').velocity({
+    backgroundColor: ['#F5F8FA', '#ffffff'],
+    opacity: [1, 0.8]
+  }, 350, 'ease-in-out')
 }
 
 function clearFields() {

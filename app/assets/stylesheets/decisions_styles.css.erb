@@ -80,15 +80,21 @@ article h5 a {
 }
 
 .new_decision {
-  background: -webkit-linear-gradient(#F5F8FA, white); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#F5F8FA, white); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#F5F8FA, white); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#F5F8FA, white); /* Standard syntax */
+  background: -webkit-linear-gradient(rgba(255,0,0,0), white); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(rgba(255,0,0,0), white); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(rgba(255,0,0,0), white); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(rgba(255,0,0,0), white); /* Standard syntax */
   color: #25282E;
   text-align: center;
   display: block;
   margin: 0 auto;
   border-radius: 5px;
+}
+
+.light-shadow {
+  transition: 0.5s;
+  box-shadow: 1px 1px 1px #cccccc;
+  margin-bottom: 5px;
 }
 
 .article-avatar {
@@ -141,6 +147,7 @@ article h5 a {
 }
 
 .option-box-wrapper a:hover {
+  transition: 0.2s background-color;
   color: #25282E;
   background-color: #A5DBD8;
 }
@@ -148,6 +155,14 @@ article h5 a {
 .vote-selected-btn {
   background-color: #65D3E5;
   border: none;
+}
+
+.flash-message {
+  color: #F58340;
+  width: 100%;
+  margin: 0 auto;
+  bottom: 25px;
+  position: absolute;
 }
 
 .vote-selected-btn a:hover {
@@ -224,7 +239,6 @@ article h5 a {
   width: 100%;
   display: inline;
 }
-
 
 .option-box-wrapper .vote-selected-btn:hover {
   background-color: #65D3E5;
