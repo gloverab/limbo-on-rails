@@ -8,10 +8,14 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= render 'layouts/header' %>
-    <main>
-      <%= yield %>
-    </main>
-  </body>
+  <% if !current_user %>
+    <body class="logged-out">
+  <% else %>
+    <body>
+  <% end %>
+      <%= render 'layouts/header' %>
+      <main>
+        <%= yield %>
+      </main>
+    </body>
 </html>

@@ -58,11 +58,11 @@ function doVote(event) {
     $(`#decision-wrapper-${decisionId} #${persuasion}`).velocity({
       width: '93%',
       height: 54
-    }, 50)
+    }, 400, 'spring')
     $(`#decision-wrapper-${decisionId} #decision-${decisionId}-option-${otherPersuasion}`).velocity({
       width: '89%',
       height: 48
-    }, 50)
+    }, 400, 'spring')
 
     $('li#flash-li')[0].innerHTML = "You just switched your vote!"
 
@@ -75,11 +75,11 @@ function doVote(event) {
     $(`#decision-wrapper-${decisionId} #${persuasion}`).addClass("vote-selected-btn").velocity({
       width: '93%',
       height: 54
-    }, 50)
+    }, 400, 'spring')
     $(`#decision-wrapper-${decisionId} #decision-${decisionId}-option-${otherPersuasion}`).addClass("vote-rejected-btn").velocity({
       width: '89%',
       height: 48
-    }, 50)
+    }, 400, 'spring')
     $('li#flash-li')[0].innerHTML = "Ay! Good choice!"
 
   } else if (hasSelected) {
@@ -218,9 +218,10 @@ function addSubmit() {
 }
 
 function flashNew() {
-  $('#just-decisions').children().first().velocity({
-    backgroundColor: ['#DDDDDD', '#FFFFFF']
-  },800)
+  $('article').first().velocity({
+    backgroundColor: ['#ffffff', '#FFCA90'],
+    opacity: 1
+  },900, 'ease-in-out')
 }
 
 function clearFields() {

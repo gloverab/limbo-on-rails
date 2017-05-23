@@ -1,4 +1,8 @@
+<% if !current_user %>
 <header>
+<% else %>
+<header id="header-logged-in">
+<% end %>
   <nav>
     <h2 class="logo"><%= link_to "LIMBO", '/' %></h2>
     <ul>

@@ -14,13 +14,14 @@ article {
   margin-bottom: 15px;
   text-align: center;
   color: #25282E;
-  background-color: #DDDDDD;
-  border: 1px solid #F5A241;
-  border-radius: 5px;
+  background-color: white;
+  border: 1px solid #eeeeee;
+  /*border-radius: 5px;*/
+  box-shadow: 1px 2px 2px #25282e;
 }
 
 article:hover {
-  background-color: #eeeeee;
+  background-color: #F5F8FA;
 }
 
 article h2 {
@@ -66,10 +67,11 @@ article h5 a {
   max-width: 410px;
   margin-top: 15px;
   margin-left: 15px;
-  border: 1px solid #ED9F13;
-  border-radius: 4px;
-  background-color: #dddddd;
+  border: 1px solid #eeeeee;
+  /*border-radius: 2px;*/
+  background-color: white;
   color: #25282E;
+  box-shadow: 1px 1px 2px #25282E;
 }
 
 .profile-card ul {
@@ -79,24 +81,30 @@ article h5 a {
 }
 
 .new_decision {
+  background: -webkit-linear-gradient(#F5F8FA, #dddddd); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#F5F8FA, #dddddd); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#F5F8FA, #dddddd); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#F5F8FA, #dddddd); /* Standard syntax */
   color: #25282E;
   text-align: center;
   display: block;
   margin: 0 auto;
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
 }
 
 .article-avatar {
   position: absolute;
-  width: 35px;
-  left: 2px;
-  top: 2px;
-  padding: 3px;
-  border-radius: 100%;
-  border: 2px solid #25282E;
+  width: 41px;
+  left: 4px;
+  top: 4px;
+  border-radius: 5px;
+  border: 1px solid white;
 }
 
 .article-avatar:hover {
-  border: 2px solid #F5A241;
+  border: 1px solid #eeeeee;
 }
 
 .option-box {
@@ -108,7 +116,7 @@ article h5 a {
 }
 
 .vote-count {
-  background-color: #F5A241;
+  background-color: #F58340;
   display: inline-block;
   padding: 2px 5px 0 5px;
   border-bottom-left-radius: 6px;
@@ -124,7 +132,7 @@ article h5 a {
 }
 
 .vote-btn {
-  background-color: #F5A241;
+  background-color: #F58340;
   display: inline-block;
   text-align: center;
   font-size: 1em;
@@ -137,12 +145,16 @@ article h5 a {
 
 .option-box-wrapper a:hover {
   color: #25282E;
-  background-color: #7FBEEB;
+  background-color: #A5DBD8;
 }
 
 .vote-selected-btn {
-  background-color: #7FBEEB;
+  background-color: #65D3E5;
   border: none;
+}
+
+.vote-selected-btn a:hover {
+  background-color: #65D3E5;
 }
 
 .vote-rejected-btn {
@@ -155,10 +167,8 @@ article h5 a {
 
 .form-wrapper {
   position: relative;
-  border: 1px solid #ED9F13;
-  border-radius: 4px;
-  background-color: #dddddd;
-  color: #25282E;
+  border: 1px solid #25282E;
+  background-color: white;
 }
 
 .form-wrapper input {
@@ -167,7 +177,7 @@ article h5 a {
 
 .option-selected-votes {
   margin-bottom: 30px;
-  background-color: #7FBEEB;
+  background-color: #65D3E5;
   display: inline-block;
 }
 
@@ -180,7 +190,7 @@ article h5 a {
 }
 
 #active-avatar {
-  border: 4px solid #F5A241;
+  border: 4px solid #F58340;
 }
 
 #profile-card-avatar {
@@ -206,11 +216,11 @@ article h5 a {
 }
 
 #decisions-header a {
-  color: #DDDDDD;
+  color: #25282E;
 }
 
 #decisions-header a:hover {
-  color: #F5A241;
+  color: #F58340;
 }
 
 #show-decision {
@@ -222,9 +232,9 @@ article h5 a {
   display: inline;
 }
 
-#vote-btn-wrapper a:hover {
-  color: #25282E;
-  background-color: #7FBEEB;
+
+.option-box-wrapper .vote-selected-btn:hover {
+  background-color: #65D3E5;
 }
 
 #option-box-1 {
@@ -261,12 +271,12 @@ article h5 a {
   width: auto;
   margin-left: 5px;
   background-color: transparent;
-  color: #DDDDDD;
+  color: #25282E;
   border: none;
 }
 
 #decision_title_submit:hover {
-  color: #F5A241;
+  color: #F58340;
 }
 
 #new_from_index {
