@@ -23,11 +23,14 @@
 
     <div class="discussion-details">
 
-      <div class="discussion-header group">
+      <div class="discussion-header group" id="decision-wrapper-<%= @discussion.decision.id %>">
         <h1><strong><%= @discussion.decision.title %></strong></h1>
         <h4><%= @discussion.reason %></h4>
         <p><%= @discussion.decision.content %></p>
+
         <%= render partial: 'votes/option_boxes', locals: {decision: @discussion.decision} %>
+
+        <div class="flash-message" id="discussion-flash"></div>
       </div>
 
       <div class="new-reply">

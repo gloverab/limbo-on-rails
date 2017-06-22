@@ -3,8 +3,8 @@
     <%= link_to discussion do %>
       <div class="discussion-box group">
         <%= image_tag discussion.author.image_path, class: "discussion-index-avatar" %>
-        <p><%= discussion.replies.count %> people are discussing <%= discussion.author.username %>'s question:</p>
-        <p><%= discussion.decision.title %></p>
+        <h5><%= discussion.replies.count %> people are discussing <%= discussion.author.username %>'s question:</h5>
+        <h5><%= discussion.decision.title %></h5>
       </div>
     <% end %>
   <% end %>

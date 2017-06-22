@@ -18,9 +18,9 @@
       <% @decisions.each do |decision| %>
 
           <%= render partial: 'decision_card', locals: {decision: decision} %>
-        
+
       <% end %>
     </div>
-    <%= link_to "Show more...", '/', id: "show-more-index" %>
+    <%= link_to "more...", '/', id: "show-more-index" %>
   </div>
 </div>

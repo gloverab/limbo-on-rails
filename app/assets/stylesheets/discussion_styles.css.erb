@@ -4,7 +4,6 @@
   display: block;
   margin: 0 auto;
   margin-top: 15px;
-  background-color: white;
   color: #25282E;
   border-radius: 4px;
 }
@@ -36,6 +35,12 @@
 .discussion-user {
   float: left;
   width: 35%;
+  padding: 5px;
+  margin: 5px;
+  background-color: white;
+  border-bottom: 1px solid #25282E;
+  border-right: 1px solid #25282E;
+  box-shadow: 1px 1px 1px solid #25282E;
 }
 
 .reply-box {
@@ -62,7 +67,6 @@
 }
 
 .discussion-header {
-  border: 1px solid #25282E;
   margin-bottom: 15px;
   text-align: center;
 }
@@ -87,19 +91,28 @@
 }
 
 .discussion-box:hover {
-  background-color: #eeeeee;
+  background-color: #F5F8FA;
 }
 
 .discussion-index-avatar {
+  margin: 3px;
   border-radius: 2px;
   float: left;
-  width: 80px;
+  width: 41px;
 }
 
 .new_reply {
   float: left;
   border: 1px solid #25282E;
   width: 93%;
+}
+
+#discussion-flash {
+  width: 100%;
+  clear: both;
+  position: absolute;
+  text-align: center;
+  position: relative;
 }
 
 #reply_submit {

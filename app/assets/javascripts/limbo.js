@@ -20,6 +20,14 @@ var attachListeners = function() {
   $('#show-more-index').on('click', function(event) {
     showMore(event)
   })
+  $('.discussion-details').on('click', function(event) {
+    if($(event.target).attr('class').includes('vote-btn')) {
+      doVote(event)
+    }
+  })
+  $('.delete-decision-btn').on('click', function(event) {
+    deleteDecision(event)
+  })
 }
 
 var scrollingCommands = function() {
@@ -33,6 +41,8 @@ var scrollingCommands = function() {
     showMore(event)
   }
 }
+
+
 
 function doVote(event) {
   var decisionId = event.target.parentElement.dataset.parent
@@ -151,7 +161,7 @@ function newPostDropdown(event) {
       success: function() {
         $('#limit').velocity({
           height: $(`#append-form`).height()
-        },400)
+        },300, 'linear')
       }
     }).done(addSubmit).done(addShading)
 
@@ -161,7 +171,7 @@ function newPostDropdown(event) {
         $(this).css('-moz-transform','rotate('+now+'deg)');
         $(this).css('transform','rotate('+now+'deg)');
         },
-        duration:'slow'
+        duration: 400
     },'linear')
 
   } else {
@@ -184,6 +194,22 @@ function createDilemma(event) {
       clearFields()
     }
   }).done(flashNew).done(removeShading)
+}
+
+function deleteDecision(event) {
+  event.preventDefault()
+
+  var href = event.target.href
+  $.ajax({
+    url: href,
+    method: "DELETE",
+    success: removeDecision
+  })
+
+}
+
+function removeDecision() {
+  debugger
 }
 
 function showMore(event) {
