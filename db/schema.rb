@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 20170518201207) do
     t.integer  "decision_id"
     t.integer  "option_id"
     t.integer  "voter_id"
-    t.boolean  "persuasion"
+    t.integer  "persuasion"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
