@@ -23,11 +23,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def image_select
-    current_user.update(image_path: params[:image_path])
-    redirect_to edit_user_registration_path
-  end
-
   private
 
   def set_discussions

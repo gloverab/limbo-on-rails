@@ -1,4 +1,4 @@
-<%= image_tag @user.image_path, id: "user-slide-avatar" if @user.image_path %>
+<%= image_tag @user.uploaded_avatar.url, id: "user-slide-avatar" if @user.uploaded_avatar.url %>
   <h3><strong><%= link_to @user.username, @user %>'s dilemmas</strong></h3>
   <p>
     <%= @user.first_name %> <%= @user.last_name %>

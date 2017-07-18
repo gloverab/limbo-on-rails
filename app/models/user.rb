@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   devise :omniauthable, :omniauth_providers => [:facebook]
 
-  validates_presence_of :username, :first_name, :last_name, :age, :on => :update
+  validates_presence_of :username, :on => :update
 
   has_many :decisions, foreign_key: "author_id"
   has_many :discussions, foreign_key: "author_id"
@@ -15,6 +15,9 @@ class User < ActiveRecord::Base
   #avadakedavra
   belongs_to :avatar, optional: true
   accepts_nested_attributes_for :decisions
+
+  has_attached_file :uploaded_avatar, default_url: '765-default-avatar.png'
+  validates_attachment_content_type :uploaded_avatar, content_type: /\Aimage\/.*\z/
 
   scope :by_signup, -> {order(id: :asc)}
   scope :most_indecisive, -> {joins(:decisions).group("users.id").order("count(users.id) DESC")}
@@ -58,7 +61,7 @@ class User < ActiveRecord::Base
       user.password = Devise.friendly_token[0,20]
       user.first_name = names[0]
       user.last_name = names[1]
-      user.image_path = "http://graph.facebook.com/#{user.uid}/picture?type=large"
+      user.uploaded_avatar.url = "http://graph.facebook.com/#{user.uid}/picture?type=large"
       user.save
     end
   end

@@ -5,7 +5,7 @@
   <div class="discussion-overview group">
 
     <div class="discussion-user">
-      <%= image_tag @discussion.author.image_path, class: "profile-show-avatar" if @discussion.author.image_path %>
+      <%= image_tag @discussion.author.uploaded_avatar.url, class: "profile-show-avatar" if @discussion.author.uploaded_avatar.url %>
       <h2><strong><%= @discussion.author.username %></strong></h2>
       <h3>Votes Cast: <%= @discussion.author.number_of_decisions_made %></h3>
       <h3>Dilemmas Posed: <%= @discussion.author.number_of_dilemmas_posed %></h3>
@@ -49,7 +49,7 @@
 
         <% if reply.author %>
           <div class="reply-box group">
-            <%= image_tag reply.author.image_path, class: 'reply-show-avatar' %>
+            <%= image_tag reply.author.uploaded_avatar.url, class: 'reply-show-avatar' %>
             <h3><%= reply.content %> | @<%= link_to reply.author.username, reply.author %></h3>
             <div class="reply-details">
               <h5><%= reply.author ? (link_to reply.author.username, reply.author) : "a former user" %> posted this in response to <%= link_to @discussion.author.username, @discussion.author %> <%= link_to " - - delete", reply, method: :delete if reply.author == current_user %></h5>

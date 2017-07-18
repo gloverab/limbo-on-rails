@@ -2,7 +2,7 @@
   <% @discussions.each do |discussion| %>
     <%= link_to discussion do %>
       <div class="discussion-box group">
-        <%= image_tag discussion.author.image_path, class: "discussion-index-avatar" %>
+        <%= image_tag discussion.author.uploaded_avatar.url, class: "discussion-index-avatar" %>
         <h5><%= discussion.replies.count %> people are discussing <%= discussion.author.username %>'s question:</h5>
         <h5><%= discussion.decision.title %></h5>
       </div>

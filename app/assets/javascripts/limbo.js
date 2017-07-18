@@ -28,6 +28,10 @@ var attachListeners = function() {
   $('.delete-decision-btn').on('click', function(event) {
     deleteDecision(event)
   })
+  $("#edit-user-avatar").dropzone({ url: "/file/post" })
+  $("#photo-upload-form").on('change', function(event) {
+    event.currentTarget.submit()
+  })
 }
 
 var scrollingCommands = function() {

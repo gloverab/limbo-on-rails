@@ -1,6 +1,7 @@
 <div id="decision-wrapper-<%= decision.id %>">
   <article class="group" id="decision-<%= decision.id %>">
-    <%= link_to image_tag(decision.author.image_path, class: "article-avatar"), decision.author if decision.author  %>
+
+    <%= link_to image_tag(decision.author.uploaded_avatar.url, class: "article-avatar"), decision.author if decision.author  %>
     <h2><strong>"</strong><%= decision.title %><strong>"</strong></h2>
 
     <div id="vote-btn-wrapper">
@@ -32,6 +33,7 @@
 
       <% end %>
     </div>
+
     <div class="flash-message"></div>
     <br>
     <div id="decision-details">
@@ -41,5 +43,10 @@
         <h5><%= decision.author ? (link_to decision.author.username, decision.author) : "a former user" %> needed to know by <%= decision.deadline.strftime("%I:%M %p") %> on <%= decision.deadline.strftime("%B %d, %Y") %>, and you're too late.<%= link_to "[delete]", decision, id: "delete-decision-#{decision.id}", class: "delete-decision-btn", method: :delete if decision.author == current_user %></h5>
       <% end %>
     </div>
+
+    <div class="decision-comment-form-wrapper">
+      
+    </div>
+
   </article>
 </div>
