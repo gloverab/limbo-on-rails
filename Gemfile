@@ -41,6 +41,7 @@ gem 'seed_dump'
 gem 'typhoeus'
 gem 'active_model_serializers'
 gem 'paperclip'
+gem 'aws-sdk', '~> 2.3'
 gem 'dropzonejs-rails'
 
 group :development, :test do
